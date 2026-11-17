@@ -1,0 +1,9 @@
+{
+  "python_compile": "PASS",
+  "parser_selftest": "PASS",
+  "month_range_count": 35,
+  "candidate_input_rows": 906,
+  "candidate_rows_without_official_issue_id": 906,
+  "workflow_dispatch_only": "PASS",
+  "repository_write_permission": "NONE"
+}
