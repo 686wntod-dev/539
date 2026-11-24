@@ -1,0 +1,122 @@
+{
+  "registry_id": "GPT_REBUILT_REGISTRY_V1",
+  "created_at": "2026-11-24",
+  "purpose": "GPT-generated clean-room and Shadow model reconstruction; not historical Canonical Registry v3 or Production Registry",
+  "production_authorized": false,
+  "release_status": "REBUILT_CLEANROOM_AND_SHADOW_VALIDATION_ONLY",
+  "data_sources": [
+    {
+      "id": "FORMAL7_MASTER_4037",
+      "rows": 4037,
+      "cutoff": "2026-11-16",
+      "sha256": "6c18084eab2966e4afc37e45fa916ad4a77414f07733a2947e321851c56e1628",
+      "identity": "Formal7 clean-room lock input; includes user-confirmed 2026-11-16 row"
+    },
+    {
+      "id": "SHADOW_MASTER_4036",
+      "rows": 4036,
+      "cutoff": "2026-11-14",
+      "sha256": "c857fe7ea8995bb28f9d5d168da513792cb21a3334d18753e96dd5482c1f6a06",
+      "identity": "Full4034 Shadow and R3-HGB 2026-11-16 lock input"
+    }
+  ],
+  "models": [
+    {
+      "model_id": "V1-Rebuild-1-CR1",
+      "track": "FORMAL7_SLOT_REBUILD",
+      "status": "CLEANROOM_REPLACEMENT_NOT_HISTORICAL_PRODUCTION",
+      "lock_target": "2026-11-17",
+      "direction": "positive"
+    },
+    {
+      "model_id": "V2-New-1-CR1",
+      "track": "FORMAL7_SLOT_REBUILD",
+      "status": "CLEANROOM_REPLACEMENT_NOT_HISTORICAL_PRODUCTION",
+      "lock_target": "2026-11-17",
+      "direction": "positive"
+    },
+    {
+      "model_id": "R3-New-1-CR1",
+      "track": "FORMAL7_SLOT_REBUILD",
+      "status": "CLEANROOM_REPLACEMENT_NOT_HISTORICAL_PRODUCTION",
+      "lock_target": "2026-11-17",
+      "direction": "reverse"
+    },
+    {
+      "model_id": "AI-1-Legacy-CR1",
+      "track": "FORMAL7_SLOT_REBUILD",
+      "status": "CLEANROOM_REPLACEMENT_NOT_HISTORICAL_PRODUCTION",
+      "lock_target": "2026-11-17",
+      "direction": "positive"
+    },
+    {
+      "model_id": "AI-1-TieSeed-CR1",
+      "track": "FORMAL7_SLOT_REBUILD",
+      "status": "CLEANROOM_REPLACEMENT_NOT_HISTORICAL_PRODUCTION",
+      "lock_target": "2026-11-17",
+      "direction": "positive"
+    },
+    {
+      "model_id": "AI-2-19F-CR1",
+      "track": "FORMAL7_SLOT_REBUILD",
+      "status": "CLEANROOM_REPLACEMENT_NOT_HISTORICAL_PRODUCTION",
+      "lock_target": "2026-11-17",
+      "direction": "positive"
+    },
+    {
+      "model_id": "AI-3-Full4036-CR1",
+      "track": "FORMAL7_SLOT_REBUILD",
+      "status": "CLEANROOM_REPLACEMENT_NOT_HISTORICAL_PRODUCTION",
+      "lock_target": "2026-11-17",
+      "direction": "positive"
+    },
+    {
+      "model_id": "V1_Full4034_Shadow_v1",
+      "track": "SHADOW_ONLY",
+      "status": "SHADOW_LOCK_REPLAY_ONLY_NOT_FORMAL",
+      "lock_target": "2026-11-16",
+      "direction": "positive"
+    },
+    {
+      "model_id": "V2_Full4034_Shadow_v1",
+      "track": "SHADOW_ONLY",
+      "status": "SHADOW_LOCK_REPLAY_ONLY_NOT_FORMAL",
+      "lock_target": "2026-11-16",
+      "direction": "positive"
+    },
+    {
+      "model_id": "R3_Full4034_Shadow_v1",
+      "track": "SHADOW_ONLY",
+      "status": "SHADOW_LOCK_REPLAY_ONLY_NOT_FORMAL",
+      "lock_target": "2026-11-16",
+      "direction": "reverse"
+    },
+    {
+      "model_id": "MIX_Full4034_Shadow_v1",
+      "track": "SHADOW_ONLY",
+      "status": "SHADOW_LOCK_REPLAY_ONLY_NOT_FORMAL",
+      "lock_target": "2026-11-16",
+      "direction": "positive"
+    },
+    {
+      "model_id": "R3-HGB-NoPP-Shadow-v1",
+      "track": "SHADOW_ONLY",
+      "status": "SHADOW_LOCK_REPLAY_ONLY_NOT_FORMAL",
+      "lock_target": "2026-11-16",
+      "direction": "reverse"
+    }
+  ],
+  "family_rules": [
+    "AI-1 Legacy and TieSeed are one family vote, not independent votes.",
+    "Formal7 rebuilt slots do not become historical original Formal7 by replay equivalence.",
+    "Shadow4 and R3-HGB remain Shadow-only."
+  ],
+  "open_gates": [
+    "Historical original Production lineage not recovered.",
+    "Canonical Registry v3 Active source not recovered.",
+    "No external scheduler/worker/service deployment receipts.",
+    "R3 11/17 A-line trainer exact bytes, B-line program and B-line lock remain unavailable.",
+    "Official period evidence for inferred period rows remains a separate data-provenance issue.",
+    "Retraining artifact byte-equivalence did not reproduce in the current environment; preserved archived artifacts remain the replay source."
+  ]
+}
