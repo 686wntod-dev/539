@@ -139,6 +139,19 @@ def main():
         required={'draw_date','expected_numbers','official_issue_id'}
         if not required.issubset(set(candidates[0])):
             raise SystemExit('BLOCKED_CANDIDATE_INPUT_SCHEMA_INVALID')
+        candidate_dates=[]
+        for row_no, row in enumerate(candidates, start=2):
+            date=str(row.get('draw_date',''))[:10]
+            try:
+                if datetime.fromisoformat(date).date().isoformat()!=date: raise ValueError()
+            except Exception:
+                raise SystemExit(f'BLOCKED_CANDIDATE_INVALID_DATE_ROW_{row_no}')
+            if not norm_nums(row.get('expected_numbers','')):
+                raise SystemExit(f'BLOCKED_CANDIDATE_INVALID_NUMBERS_ROW_{row_no}')
+            candidate_dates.append(date)
+        if len(set(candidate_dates)) != len(candidate_dates):
+            raise SystemExit('BLOCKED_CANDIDATE_DUPLICATE_DATE')
+        summary['candidate_input_rows_validated']=len(candidates)
         idx={(d['date'],d['numbers']):d for d in draws}
         candidate_by_date={str(c.get('draw_date',''))[:10]:c for c in candidates}
         reconciled=[]
