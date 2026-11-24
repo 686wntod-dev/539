@@ -60,7 +60,7 @@ def main():
     ap=argparse.ArgumentParser()
     ap.add_argument('--mode',choices=['probe','full'],default='probe')
     ap.add_argument('--probe-month',default='2026-11')
-    ap.add_argument('--input',default='539_906筆次級資料交叉比對_v1.csv')
+    ap.add_argument('--input',default='candidates_906.csv')
     ap.add_argument('--out',default='539_v10_capture')
     ap.add_argument('--timeout',type=int,default=20)
     ap.add_argument('--retries',type=int,default=2)
