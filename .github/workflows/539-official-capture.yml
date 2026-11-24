@@ -2,6 +2,11 @@
 name: 539 Official API Evidence Capture v10
 
 on:
+  push:
+    paths:
+      - '.github/workflows/539-official-capture.yml'
+      - 'fetch_official_daily539_api_v10.py'
+      - 'candidates_906.csv'
   workflow_dispatch:
     inputs:
       mode:
@@ -39,7 +44,7 @@ jobs:
       - name: Capture official-site API evidence
         run: >-
           python fetch_official_daily539_api_v10.py
-          --mode "${{ inputs.mode }}"
+          --mode "${{ inputs.mode || 'full' }}"
           --input candidates_906.csv
           --out 539_v10_capture
       - name: Upload immutable evidence artifact
