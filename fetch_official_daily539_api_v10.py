@@ -18,7 +18,13 @@ HEADERS = {
 }
 
 def norm_nums(value):
-    vals = value[:5] if isinstance(value, list) else re.findall(r"\d+", str(value))[:5]
+    if isinstance(value, list):
+        if len(value) != 5: return ""
+        vals = value
+    else:
+        raw = str(value).strip()
+        if not re.fullmatch(r"\d{1,2}(?:[ ,，、]+\d{1,2}){4}", raw): return ""
+        vals = re.split(r"[ ,，、]+", raw)
     try:
         nums = sorted(int(v) for v in vals)
         if len(nums) != 5 or len(set(nums)) != 5 or any(n < 1 or n > 39 for n in nums): return ""
@@ -26,18 +32,28 @@ def norm_nums(value):
     except Exception: return ""
 
 def parse_api(data):
-    if not isinstance(data, dict) or not isinstance(data.get("content"), dict): raise ValueError("INVALID_TOP_LEVEL_SCHEMA")
-    arr = data["content"].get("daily539Res")
-    if not isinstance(arr, list): raise ValueError("MISSING_OR_INVALID_content.daily539Res")
+    if not isinstance(data, dict) or data.get("rtCode") != 0 or not isinstance(data.get("content"), dict):
+        raise ValueError("INVALID_TOP_LEVEL_SCHEMA_OR_NONZERO_RTCODE")
+    content=data["content"]
+    arr=content.get("daily539Res")
+    total=content.get("totalSize")
+    if not isinstance(arr, list) or not isinstance(total, int) or total < 0:
+        raise ValueError("MISSING_OR_INVALID_DAILY539_ARRAY_OR_TOTALSIZE")
+    if total != len(arr):
+        raise ValueError(f"PAGINATION_REQUIRED_OR_TRUNCATED_RESPONSE: totalSize={total}, rows={len(arr)}")
     out=[]
     for i, r in enumerate(arr):
         if not isinstance(r, dict): raise ValueError(f"ROW_{i}_NOT_OBJECT")
         raw_date=str(r.get("lotteryDate", ""))
         try: date=datetime.fromisoformat(raw_date.replace("Z", "+00:00")).date().isoformat()
-        except Exception: date=raw_date[:10]
-        period=str(r.get("period", "")); nums=norm_nums(r.get("drawNumberAppear", []))
-        if not date or not period or not nums: raise ValueError(f"ROW_{i}_MISSING_DATE_PERIOD_OR_VALID_FIVE_NUMBERS")
+        except Exception: raise ValueError(f"ROW_{i}_INVALID_DATE")
+        period=str(r.get("period", ""))
+        if not re.fullmatch(r"\d{9}", period): raise ValueError(f"ROW_{i}_INVALID_PERIOD")
+        nums=norm_nums(r.get("drawNumberAppear", []))
+        if not nums: raise ValueError(f"ROW_{i}_INVALID_FIVE_NUMBERS")
         out.append({"date":date,"period":period,"numbers":nums})
+    if len({x["date"] for x in out}) != len(out): raise ValueError("DUPLICATE_DATE_WITHIN_MONTH")
+    if len({x["period"] for x in out}) != len(out): raise ValueError("DUPLICATE_PERIOD_WITHIN_MONTH")
     return out
 
 def months_between(start, end):
@@ -48,9 +64,19 @@ def months_between(start, end):
         if m==13: y,m=y+1,1
 
 def selftest():
-    fixture={"content":{"daily539Res":[{"period":"115000277","lotteryDate":"2026-11-16T00:00:00","drawNumberAppear":[11,21,22,35,37]}]}}
+    fixture={"rtCode":0,"content":{"totalSize":1,"daily539Res":[{"period":115000277,"lotteryDate":"2026-11-16T00:00:00","drawNumberAppear":[11,21,22,35,37]}]}}
     assert parse_api(fixture)==[{"date":"2026-11-16","period":"115000277","numbers":"11 21 22 35 37"}]
-    for bad in ({},{"content":{}},{"content":{"daily539Res":None}}):
+    assert norm_nums([1,2,3,4,5,6]) == ""
+    assert norm_nums("1,2,3,4,5,999") == ""
+    invalid=[
+        {},
+        {"rtCode":1,"content":{"totalSize":1,"daily539Res":[]}},
+        {"rtCode":0,"content":{}},
+        {"rtCode":0,"content":{"totalSize":2,"daily539Res":[fixture["content"]["daily539Res"][0]]}},
+        {"rtCode":0,"content":{"totalSize":1,"daily539Res":[{"period":115000277,"lotteryDate":"not-a-date","drawNumberAppear":[1,2,3,4,5]}]}},
+        {"rtCode":0,"content":{"totalSize":1,"daily539Res":[{"period":115000277,"lotteryDate":"2026-11-16","drawNumberAppear":[1,2,3,4,5,6]}]}},
+    ]
+    for bad in invalid:
         try: parse_api(bad)
         except ValueError: pass
         else: raise AssertionError("invalid schema accepted")
@@ -72,7 +98,7 @@ def main():
     out=Path(args.out); rawdir=out/'raw_api_responses'; metadir=out/'metadata'
     rawdir.mkdir(parents=True,exist_ok=True); metadir.mkdir(parents=True,exist_ok=True)
     months=list(months_between('2024-01','2026-11')) if args.mode=='full' else [args.probe_month]
-    summary={"version":"v10","endpoint":API,"endpoint_classification":"website-internal API; not a published/stable API contract","selftest":selftest(),"mode":args.mode,"requested_months":months,"captured_months":0,"failed_months":[],"parsed_rows":0,"candidate_rows":0,"exact_date_and_five_number_matches":0,"status":"RUNNING"}
+    summary={"version":"v10","endpoint":API,"endpoint_classification":"website-internal API; not a published/stable API contract","selftest":selftest(),"mode":args.mode,"requested_months":months,"captured_months":0,"failed_months":[],"schema_failed_months":[],"parsed_rows":0,"candidate_rows":0,"exact_date_and_five_number_matches":0,"status":"RUNNING"}
     all_draws=[]; errors=[]; session=requests.Session(); session.headers.update(HEADERS)
     for ix,month in enumerate(months):
         params={"period":"","month":month,"pageNum":1,"pageSize":PAGE_SIZE}
@@ -95,7 +121,7 @@ def main():
             for row in parsed: row['source_month']=month
             all_draws.extend(parsed); summary['parsed_rows']+=len(parsed)
         except Exception as e:
-            parsed=[]; meta['schema_status']='INVALID_OR_UNEXPECTED_SCHEMA'; meta['parse_error']=repr(e)
+            parsed=[]; meta['schema_status']='INVALID_OR_UNEXPECTED_SCHEMA'; meta['parse_error']=repr(e); summary['schema_failed_months'].append(month)
         (metadir/f'{stem}.metadata.json').write_text(json.dumps(meta,ensure_ascii=False,indent=2),encoding='utf-8')
         summary['captured_months']+=1
         if ix<len(months)-1: time.sleep(args.sleep)
@@ -141,9 +167,15 @@ def main():
         summary['same_date_number_conflicts']=sum(r['classification']=='SAME_DATE_NUMBER_CONFLICT' for r in api_only)
         summary['candidate_reconciliation_status']='REVIEW_REQUIRED_DIFFERENCES' if api_only or summary['candidate_rows_without_exact_api_match'] else 'EXACT_MATCH_COMPLETE'
         summary['warning']='API period values are website-internal response candidates only. Do not automatically promote period IDs to official master data; independently verify and use append-only evidence overlay.'
-    summary['status']='CAPTURE_COMPLETE' if summary['captured_months']==len(months) else ('PARTIAL_CAPTURE' if summary['captured_months'] else 'BLOCKED_NETWORK_OR_DNS')
+    if summary['captured_months'] != len(months):
+        summary['status']='PARTIAL_CAPTURE' if summary['captured_months'] else 'BLOCKED_NETWORK_OR_DNS'
+    elif summary['schema_failed_months']:
+        summary['status']='CAPTURE_WITH_SCHEMA_ERRORS'
+    else:
+        summary['status']='CAPTURE_COMPLETE'
     summary['network_failures']=errors
+    summary['reconciliation_status']=summary.get('candidate_reconciliation_status','NOT_RUN')
     (out/'summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
     print(json.dumps(summary,ensure_ascii=False,indent=2))
-    return 0 if summary['captured_months'] else 2
+    return 0 if summary['status']=='CAPTURE_COMPLETE' and summary.get('candidate_reconciliation_status') in ('EXACT_MATCH_COMPLETE','REVIEW_REQUIRED_DIFFERENCES') else 2
 if __name__=='__main__': sys.exit(main())
