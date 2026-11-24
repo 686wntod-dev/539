@@ -114,6 +114,7 @@ def main():
         if not required.issubset(set(candidates[0])):
             raise SystemExit('BLOCKED_CANDIDATE_INPUT_SCHEMA_INVALID')
         idx={(d['date'],d['numbers']):d for d in draws}
+        candidate_by_date={str(c.get('draw_date',''))[:10]:c for c in candidates}
         reconciled=[]
         for c in candidates:
             if c.get('official_issue_id'): continue
@@ -124,8 +125,22 @@ def main():
         fields=list(dict.fromkeys(k for r in reconciled for k in r))
         with (out/'candidate_period_api_reconciliation.csv').open('w',encoding='utf-8-sig',newline='') as f:
             w=csv.DictWriter(f,fieldnames=fields); w.writeheader(); w.writerows(reconciled)
-        summary['candidate_rows']=len(reconciled); summary['exact_date_and_five_number_matches']=sum(r['api_evidence_status'].startswith('MATCHED_') for r in reconciled)
-        summary['warning']='Matches are API-response candidates only. Do not automatically promote period IDs to official master data; human review and append-only evidence overlay required.'
+        api_only=[]
+        for d in draws:
+            same_date=candidate_by_date.get(d['date'])
+            candidate_nums=norm_nums(same_date.get('expected_numbers','')) if same_date else ''
+            if candidate_nums==d['numbers']: continue
+            api_only.append({'date':d['date'],'api_period_candidate':d['period'],'api_numbers':d['numbers'],'candidate_numbers':candidate_nums,'classification':'SAME_DATE_NUMBER_CONFLICT' if same_date else 'API_DATE_NOT_IN_CANDIDATE_FILE','source_month':d['source_month']})
+        with (out/'api_only_and_conflict_rows.csv').open('w',encoding='utf-8-sig',newline='') as f:
+            w=csv.DictWriter(f,fieldnames=['date','api_period_candidate','api_numbers','candidate_numbers','classification','source_month']); w.writeheader(); w.writerows(api_only)
+        summary['candidate_rows']=len(reconciled)
+        summary['exact_date_and_five_number_matches']=sum(r['api_evidence_status'].startswith('MATCHED_') for r in reconciled)
+        summary['candidate_rows_without_exact_api_match']=sum(r['api_evidence_status']=='NO_EXACT_MATCH_IN_CAPTURED_MONTHS' for r in reconciled)
+        summary['api_only_or_conflicting_rows']=len(api_only)
+        summary['api_only_new_dates']=sum(r['classification']=='API_DATE_NOT_IN_CANDIDATE_FILE' for r in api_only)
+        summary['same_date_number_conflicts']=sum(r['classification']=='SAME_DATE_NUMBER_CONFLICT' for r in api_only)
+        summary['candidate_reconciliation_status']='REVIEW_REQUIRED_DIFFERENCES' if api_only or summary['candidate_rows_without_exact_api_match'] else 'EXACT_MATCH_COMPLETE'
+        summary['warning']='API period values are website-internal response candidates only. Do not automatically promote period IDs to official master data; independently verify and use append-only evidence overlay.'
     summary['status']='CAPTURE_COMPLETE' if summary['captured_months']==len(months) else ('PARTIAL_CAPTURE' if summary['captured_months'] else 'BLOCKED_NETWORK_OR_DNS')
     summary['network_failures']=errors
     (out/'summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')
