@@ -26,3 +26,9 @@ GitHub Actions → `539 Official API Evidence Capture v10`。手動選 `probe` �
 3. 禁止直接改寫主檔、歷史預測鎖、Registry v3或正式模型。
 4. 此流程不恢復Formal7原始程式、R3 A/B工件或Production部署，也不解除SRC-01至SRC-06 P0 Gate。
 5. Artifact保留90天，需另行下載長期封存及校驗SHA256。
+
+## Fail-closed parser hardening (Run #8 onward)
+- Require `rtCode == 0`, integer `totalSize`, and `totalSize == daily539Res.length`; truncated or pagination-incomplete month responses are rejected.
+- Reject malformed dates, non-nine-digit period values, duplicate date/period values, and any draw that does not contain exactly five distinct numbers in 01–39.
+- Validate every candidate row's ISO date and five-number field and reject duplicate candidate dates before reconciliation.
+- Invalid schema month responses produce `CAPTURE_WITH_SCHEMA_ERRORS` and a nonzero process exit; transport capture alone cannot report full success.
