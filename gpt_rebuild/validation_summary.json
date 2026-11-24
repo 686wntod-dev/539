@@ -1,0 +1,45 @@
+{
+  "validation": "PASS_12_OF_12_LOCK_REPLAYS",
+  "executed_at": "2026-11-24",
+  "formal7": {
+    "replayed": 7,
+    "exact_A_B_Pool10_and_39_rank": true,
+    "runtime_sha256": "c6d01f06a4cc51b207a9ad3bc374c79c506f0df09a64a36443976504b1bf9b67",
+    "master_sha256": "6c18084eab2966e4afc37e45fa916ad4a77414f07733a2947e321851c56e1628",
+    "model_artifact_hashes": "8_of_8_pass",
+    "prefix_invariance": "4_cutoffs_pass"
+  },
+  "full4034_shadow": {
+    "replayed": 4,
+    "exact_rank_A_B_pool": true,
+    "master_sha256": "c857fe7ea8995bb28f9d5d168da513792cb21a3334d18753e96dd5482c1f6a06"
+  },
+  "r3_hgb_shadow": {
+    "replayed": 1,
+    "target": "2026-11-16",
+    "exact_exclusion10": true,
+    "exact_39_scores": true,
+    "max_abs_score_difference": 0,
+    "excluded_10": [
+      "21",
+      "13",
+      "14",
+      "16",
+      "17",
+      "19",
+      "23",
+      "24",
+      "26",
+      "27"
+    ]
+  },
+  "total_models_replayed": 12,
+  "production_authorized": false,
+  "claims_not_made": [
+    "historical Production source recovery",
+    "Canonical Registry v3 recovery",
+    "external deployment",
+    "R3 fixed-10 exclusion 90% target",
+    "predictive superiority over random baseline"
+  ]
+}

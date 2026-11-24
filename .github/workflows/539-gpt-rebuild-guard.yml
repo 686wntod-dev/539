@@ -1,0 +1,27 @@
+name: 539 GPT Rebuild Governance Guard
+
+on:
+  push:
+    branches: [gpt-rebuild-v1]
+    paths:
+      - "gpt_rebuild/**"
+      - ".github/workflows/539-gpt-rebuild-guard.yml"
+  pull_request:
+    paths:
+      - "gpt_rebuild/**"
+      - ".github/workflows/539-gpt-rebuild-guard.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  governance-guard:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - name: Validate registry and evidence boundaries
+        run: python gpt_rebuild/guard.py

@@ -1,0 +1,33 @@
+{
+  "status": "NOT_REPRODUCED_BYTE_FOR_BYTE_IN_CURRENT_ENVIRONMENT",
+  "environment": {
+    "python": "3.13.5",
+    "numpy": "2.3.5",
+    "pandas": "2.2.3",
+    "scipy": "1.17.0",
+    "scikit_learn": "1.8.0",
+    "joblib": "1.5.3"
+  },
+  "reference_artifact_hashes": {
+    "retrained_18F/ET_model.joblib": "0dc76123043659ca28d62b980f252c0de8714963f828ac412cdfa375ba29bf0d",
+    "retrained_18F/HGB_model.joblib": "e2b563118c2798f675d4819c1a009c87aa949e288570729090162dbe6ebe44dd",
+    "retrained_18F/LOGIT_model.joblib": "01b72acf5d99ec3030b183838eb339a7863263e0faaaba2756eee494e2973bbb",
+    "AI2_BASE_19F_ExtraTrees100_retrained.joblib": "4f9fefa00335c7bd8f6891d62a1aa2d32b3b08a43c1cb3e87e211a36b9202781"
+  },
+  "current_retrain_hashes": {
+    "retrained_18F/ET_model.joblib": "3503df7477d273b082e519f74231de1f0ca7e2eb55c6c483b9c0c0b5268f9113",
+    "retrained_18F/HGB_model.joblib": "8d27927d2af9d9d0bb8e195473f6adae077fc52781081a6018f49ca600028911",
+    "retrained_18F/LOGIT_model.joblib": "8aaca8c5321bb25f61e08058f31d35957b2efd66762d908f041e085c7c02b2cf",
+    "AI2_BASE_19F_ExtraTrees100_retrained.joblib": "b8507d33512266c6ad4b4b652a02c78befc8b039853a8d62634751f1fb464b78"
+  },
+  "ranking_comparison": {
+    "V1-Rebuild-1-CR1": "DIFFERENT",
+    "V2-New-1-CR1": "DIFFERENT",
+    "R3-New-1-CR1": "DIFFERENT",
+    "AI-2-19F-CR1": "DIFFERENT",
+    "AI-1-Legacy-CR1": "SAME",
+    "AI-1-TieSeed-CR1": "SAME",
+    "AI-3-Full4036-CR1": "SAME"
+  },
+  "decision": "Do not replace/promote retrained candidates. Historical replay uses only archived SHA-verified artifacts. Cause of retraining mismatch is not yet isolated; environment/version or trainer provenance may differ."
+}
