@@ -66,6 +66,9 @@ def main():
     ap.add_argument('--retries',type=int,default=2)
     ap.add_argument('--sleep',type=float,default=0.8)
     args=ap.parse_args()
+    input_path=Path(args.input)
+    if not input_path.is_file():
+        raise SystemExit(f'BLOCKED_INPUT_FILE_MISSING: {args.input}')
     out=Path(args.out); rawdir=out/'raw_api_responses'; metadir=out/'metadata'
     rawdir.mkdir(parents=True,exist_ok=True); metadir.mkdir(parents=True,exist_ok=True)
     months=list(months_between('2024-01','2026-11')) if args.mode=='full' else [args.probe_month]
@@ -105,6 +108,11 @@ def main():
     summary['unique_api_rows']=len(draws)
     if Path(args.input).exists():
         with open(args.input,encoding='utf-8-sig',newline='') as f: candidates=list(csv.DictReader(f))
+        if not candidates:
+            raise SystemExit('BLOCKED_CANDIDATE_INPUT_EMPTY')
+        required={'draw_date','expected_numbers','official_issue_id'}
+        if not required.issubset(set(candidates[0])):
+            raise SystemExit('BLOCKED_CANDIDATE_INPUT_SCHEMA_INVALID')
         idx={(d['date'],d['numbers']):d for d in draws}
         reconciled=[]
         for c in candidates:
