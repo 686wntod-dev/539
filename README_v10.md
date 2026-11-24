@@ -9,13 +9,13 @@
 - `candidates_906.csv`：906列待核實資料，只作日期及五碼比對，不會覆寫主檔、Registry 或預測鎖。
 
 ## 已驗證執行（2026-11-24）
-- GitHub Actions Run #6，commit `b30ea7c649a76904db0698bde272be4e9f9cffbe`，完整成功。
+- GitHub Actions Run #7，commit `77ca0f2d579a386a94885c43d0e6f5db8a6469f5`，完整成功；Run #6 為前一版成功擷取。
 - 35/35月份（2024-01至2026-11）HTTP 200、合法schema；35份raw response與metadata的SHA256/bytes核對通過。
 - API資料913列，日期及期號各913個唯一值；日期排序與每列五碼合法性通過。
 - 906列候選資料中，905列日期及五碼完全吻合；1列2026-10-23存在同日五碼差異。
 - 另有7個API日期未出現在906列候選檔。
-- 對帳差異另存於 `evidence/2026-11-24_v10_api_reconciliation_review.csv`，不得自動覆寫canonical master。
-- Run #6 Artifact SHA256：`1dfb52a046a96d95299290dcb287e4e2eb37d869e7ec6997bcec38b987132ff0`。
+- 對帳差異另存於 `api_only_and_conflict_rows.csv`，並以 `evidence/2026-11-24_v10_api_reconciliation_review.csv` 和 `evidence/2026-11-24_secondary_crosscheck_disposition.csv` 留存獨立覆核，不得自動覆寫canonical master。
+- Run #7 Artifact SHA256：`300ab24ebce769d525c6d9ad27200f7060595accf981a4064b902718a5fdeb09`。對帳狀態為 `REVIEW_REQUIRED_DIFFERENCES`，8筆API-only或衝突資料均不得自動升格。
 
 ## 重新執行
 GitHub Actions → `539 Official API Evidence Capture v10`。手動選 `probe` 僅測2026-11；選 `full` 才會抓取35個月份。每次執行都應檢查summary中的 `status` 與 `candidate_reconciliation_status`；擷取成功不代表對帳無差異。
