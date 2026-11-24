@@ -1,3 +1,4 @@
+draw_index_chronological,draw_date,period_canonical_not_official,expected_numbers,official_issue_id,master_numbers_sorted,master_date_numbers_match,secondary_numbers_sorted,資料來源,secondary_record_found,secondary_numbers_match,secondary_review_status,period_id_status,official_raw_status
 3131,2024-01-01,113000001,03 09 27 30 33,,03 09 27 30 33,True,03 09 27 30 33,原始年度CSV,True,True,MATCH_DATE_AND_FIVE_NUMBERS_SECONDARY_ONLY,NOT_VERIFIED_BY_THIS_SECONDARY_FILE,NOT_EVALUATED_NO_OFFICIAL_SOURCE
 3132,2024-01-02,113000002,21 22 25 30 37,,21 22 25 30 37,True,21 22 25 30 37,原始年度CSV,True,True,MATCH_DATE_AND_FIVE_NUMBERS_SECONDARY_ONLY,NOT_VERIFIED_BY_THIS_SECONDARY_FILE,NOT_EVALUATED_NO_OFFICIAL_SOURCE
 3133,2024-01-03,113000003,01 05 21 32 37,,01 05 21 32 37,True,01 05 21 32 37,原始年度CSV,True,True,MATCH_DATE_AND_FIVE_NUMBERS_SECONDARY_ONLY,NOT_VERIFIED_BY_THIS_SECONDARY_FILE,NOT_EVALUATED_NO_OFFICIAL_SOURCE
