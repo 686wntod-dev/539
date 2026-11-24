@@ -1,22 +1,28 @@
-# 今彩539 官方來源證據擷取 v10
+# 今彩539 官方網站 API 證據擷取 v10
 
-## 目的
-在 GitHub-hosted Ubuntu runner 執行台彩網站目前使用的 `Daily539Result` 內部 API，避開本機 DNS 解析阻塞。此 API 是網站內部端點，並非台彩公開承諾穩定的API規格。
+## 用途與限制
+在 GitHub-hosted Ubuntu runner 擷取台灣彩券網站目前使用的 Daily539Result 內部 API。此端點屬網站內部 API，並非台灣彩券公開承諾穩定的 API 合約；API 回傳的期號只能作為候選證據，不能單獨升格為官方原始期別證明。
 
 ## 檔案
-- `.github/workflows/539-official-capture.yml`：手動執行 workflow；預設只探測 2026-11。
-- `fetch_official_daily539_api_v10.py`：月度擷取器，保存每月原始response bytes、HTTP headers、URL、UTC時間、SHA256、解析結果與906列候選比對。
-- `candidates_906.csv`：906筆待核實清單；只作日期+五碼比對，不會覆寫主檔。
+- `.github/workflows/539-official-capture.yml`：push 變更後自動驗證；亦可手動執行 probe/full。沒有排程。
+- `fetch_official_daily539_api_v10.py`：保存原始 response bytes、HTTP headers、URL、UTC時間、SHA256、解析結果及候選對帳。
+- `candidates_906.csv`：906列待核實資料，只作日期及五碼比對，不會覆寫主檔、Registry 或預測鎖。
 
-## 使用
-將整個資料夾內容放進既有 GitHub repository 根目錄，確保 CSV、Python 檔案及 `.github/workflows/` 路徑不變。到 Actions → `539 Official API Evidence Capture v10` → Run workflow，先選 `probe`。確認下載的 artifact 中有 `202611.response.bin`、metadata、summary，且 HTTP/schema 正常後，再選 `full`。
+## 已驗證執行（2026-11-24）
+- GitHub Actions Run #6，commit `b30ea7c649a76904db0698bde272be4e9f9cffbe`，完整成功。
+- 35/35月份（2024-01至2026-11）HTTP 200、合法schema；35份raw response與metadata的SHA256/bytes核對通過。
+- API資料913列，日期及期號各913個唯一值；日期排序與每列五碼合法性通過。
+- 906列候選資料中，905列日期及五碼完全吻合；1列2026-10-23存在同日五碼差異。
+- 另有7個API日期未出現在906列候選檔。
+- 對帳差異另存於 `evidence/2026-11-24_v10_api_reconciliation_review.csv`，不得自動覆寫canonical master。
+- Run #6 Artifact SHA256：`1dfb52a046a96d95299290dcb287e4e2eb37d869e7ec6997bcec38b987132ff0`。
 
-## 升級門檻
-1. `probe` 成功不代表完整歷史月份成功。
-2. `full` 必須35個月份全數有有效HTTP response及合法schema；若有失敗月份，僅部分成功，需補抓失敗月份。
-3. `candidate_period_api_reconciliation.csv` 的 MATCH 只代表官方網站內部API response的日期+五碼吻合候選，需人工覆核期號欄位與raw evidence後，才能追加到獨立 append-only evidence overlay。
-4. 禁止直接改寫主檔、歷史預測鎖、Registry v3或正式模型。
-5. Workflow刻意沒有排程；完成手動測試與審核前不啟用定期抓取。
+## 重新執行
+GitHub Actions → `539 Official API Evidence Capture v10`。手動選 `probe` 僅測2026-11；選 `full` 才會抓取35個月份。每次執行都應檢查summary中的 `status` 與 `candidate_reconciliation_status`；擷取成功不代表對帳無差異。
 
-## 安全
-Workflow僅需 `contents: read`，不需要PAT、Secrets或寫入repository權限。Artifact保留90天；請及時下載並另外長期封存及計算SHA256 manifest。
+## 升級限制
+1. `CAPTURE_COMPLETE` 只表示月份來源擷取成功；候選差異另由 `candidate_reconciliation_status` 表示。
+2. API期號需另以官方歷史頁原始證據核對；外部第三方頁只能列次級交叉核對。
+3. 禁止直接改寫主檔、歷史預測鎖、Registry v3或正式模型。
+4. 此流程不恢復Formal7原始程式、R3 A/B工件或Production部署，也不解除SRC-01至SRC-06 P0 Gate。
+5. Artifact保留90天，需另行下載長期封存及校驗SHA256。
