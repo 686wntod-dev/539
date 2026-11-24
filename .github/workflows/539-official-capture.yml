@@ -40,7 +40,7 @@ jobs:
         run: >-
           python fetch_official_daily539_api_v10.py
           --mode "${{ inputs.mode }}"
-          --input 539_906筆次級資料交叉比對_v1.csv
+          --input candidates_906.csv
           --out 539_v10_capture
       - name: Upload immutable evidence artifact
         if: always()
