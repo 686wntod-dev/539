@@ -6,7 +6,7 @@
 ## 檔案
 - `.github/workflows/539-official-capture.yml`：手動執行 workflow；預設只探測 2026-11。
 - `fetch_official_daily539_api_v10.py`：月度擷取器，保存每月原始response bytes、HTTP headers、URL、UTC時間、SHA256、解析結果與906列候選比對。
-- `539_906筆次級資料交叉比對_v1.csv`：906筆待核實清單；只作日期+五碼比對，不會覆寫主檔。
+- `candidates_906.csv`：906筆待核實清單；只作日期+五碼比對，不會覆寫主檔。
 
 ## 使用
 將整個資料夾內容放進既有 GitHub repository 根目錄，確保 CSV、Python 檔案及 `.github/workflows/` 路徑不變。到 Actions → `539 Official API Evidence Capture v10` → Run workflow，先選 `probe`。確認下載的 artifact 中有 `202611.response.bin`、metadata、summary，且 HTTP/schema 正常後，再選 `full`。
