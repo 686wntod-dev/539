@@ -1,8 +1,8 @@
 {
   "python_compile": "PASS_GITHUB_RUN_7",
   "parser_selftest": "PASS",
-  "workflow_run_id": 45401866581,
-  "workflow_commit": "77ca0f2d579a386a94885c43d0e6f5db8a6469f5",
+  "workflow_run_id": 45402478097,
+  "workflow_commit": "0adc3f19d9bb4ca11e6756e24eff6cf9393efeed",
   "workflow_result": "SUCCESS",
   "mode": "full",
   "requested_months": 35,
@@ -22,10 +22,16 @@
   "api_only_new_dates": 7,
   "same_date_number_conflicts": 1,
   "candidate_reconciliation_status": "REVIEW_REQUIRED_DIFFERENCES",
-  "artifact_id": 14923702362,
-  "artifact_sha256": "300ab24ebce769d525c6d9ad27200f7060595accf981a4064b902718a5fdeb09",
-  "artifact_retention_until": "2027-02-22T13:17:18Z",
+  "artifact_id": 14923353141,
+  "artifact_sha256": "536184221df36b2fac03e2d1e416fccbdb997fa733ed0096efbfdec883079dec",
+  "artifact_retention_until": "2027-02-22T13:20:50Z",
   "official_historical_page_archived": "NO",
   "canonical_master_or_registry_modified": "NO",
-  "formal7_or_production_gate_changed": "NO"
+  "formal7_or_production_gate_changed": "NO",
+  "parser_hardening": "PASS",
+  "rtCode_check": "PASS",
+  "totalSize_equals_rows_check": "PASS",
+  "malformed_date_period_and_number_rejection": "PASS",
+  "duplicate_date_period_rejection": "PASS",
+  "candidate_input_rows_validated": 906
 }
