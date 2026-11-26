@@ -270,6 +270,28 @@
     "data_version_guard": [
       "4037-row Formal7 lock master SHA 6c18084eab2966e4afc37e45fa916ad4a77414f07733a2947e321851c56e1628 is not interchangeable with the 4042-row Shadow master SHA d04617018e5c2b97cd76822e7e61576420d6720a9a66e6d2064cd25c1c9d34f6",
       "4043-row append-only candidate remains a separate version; do not promote or overwrite canonical data based on row count alone"
-    ]
+    ],
+    "second_pass": {
+      "inventory_commit": "477f8cc53a4e5ad73fe2ae1b872c12a421f5261f",
+      "verified_at": "2026-11-26",
+      "exact_bytes_rehashed": [
+        "AI3_Legacy_Full4037_Rebuilt_v2.csv: 4037 rows; SHA256 6c18084eab2966e4afc37e45fa916ad4a77414f07733a2947e321851c56e1628",
+        "539_Stage169_master_4043_2026-11-23_append_only_candidate.csv: 4043 rows; SHA256 778214d7906c45d8dfd886eb5a52653868c6a4d874cdfb474d8aeb8199df0ce3",
+        "master_4043_2026-11-23_official_evidence_appended.csv: 4043 rows; SHA256 24abd0b9388b48bb0ce07e395673feadefa39491a0682b2fb2adb532ac0499c3"
+      ],
+      "stage179_records_recovered": [
+        "Stage179 report, predictions/metadata JSON, model summary, 312-row all-model rankings, SHA256 manifest",
+        "Stage182 corrected per-model method metadata",
+        "Stage181 final audit JSON and Stage173 result-sync manifest"
+      ],
+      "key_boundaries": [
+        "4037, 4042 and 4043 are distinct immutable data versions; 4043 candidates remain append-only and do not replace canonical 4042",
+        "Stage173 official result crosscheck is separate evidence; source trust and period ID in base 4043 row remain user-confirmed/inferred, not raw Taiwan Lottery evidence",
+        "Stage175 and Stage179 model artifact hashes/bytes differ; do not substitute or combine generations",
+        "Stage179 raw serialized model bytes and executed training source not recovered in this pass; Stage181 AUD-01 remains an existing finding",
+        "Stage179 model metadata must distinguish supervised 39,000-row classifiers from AI-1 deterministic frequency and AI-3 transition-count models"
+      ],
+      "execution_scope": "Recovery/lineage reconciliation only; no retraining, replay, prediction, scoring, lock mutation, or accepted-scope rerun."
+    }
   }
 }
