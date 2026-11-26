@@ -134,3 +134,16 @@ The GPT Library copy of Stage206 (`539_Stage206_專案來源身分重整與阻�
 
 ### Operational disposition
 The old external-original retrieval framing for SRC-01 through SRC-05 is retired as a default prerequisite. Their historical identity is `NOT_ESTABLISHED`, not `MISSING_FROM_USER`. Work proceeds with GPT-created evidence and new Cleanroom identities. SRC-06 is redefined as a future deployment task only if external Production is actually desired; no past deployment is presumed. Production remains HOLD until a new, explicitly scoped deployment and model/data validation are completed.
+
+## Stage207 remaining official-history evidence: new public source lead (2026-11-26)
+
+Stage207 already closed the 4,034-row structural QA and 904-row API reconciliation; neither is to be rerun. Its separate 3,130-row 2014–2023 official per-draw cross-check remains incomplete.
+
+A new public-source lead was identified: Taiwan Ministry of Finance National Treasury Administration dataset, `公益彩券開獎號碼及各獎項彩金相關資料`, data.gov.tw dataset ID 72921. The portal describes this as original-source annual lottery draw-number data and exposes a CSV resource. The Taiwan Lottery official download page independently lists annual datasets for Minguo years 103–112 (2014–2023) and says the page is updated monthly on the 5th.
+
+Source URLs:
+- https://data.gov.tw/dataset/72921
+- https://gaze.nta.gov.tw/dntmb/OpenData/csvDw?ntaCode=D423F (CSV resource linked from the dataset page; direct retrieval timed out in this run)
+- https://www.taiwanlottery.com/lotto/history/result_download/
+
+Disposition: `OFFICIAL_SOURCE_LEAD_DISCOVERED_NOT_DOWNLOADED`. The data.gov.tw dataset and official download page are source discovery only; no bytes, rows, or hashes were obtained in this turn. Do not mark any of the 3,130 rows verified until the resource bytes are retrieved, hashed, schema-mapped, and compared by draw date, issue ID, and five numbers. Any accepted data must be appended as a new evidence overlay; never overwrite the 4,034-row master or reopen the already accepted 904-row reconciliation.
