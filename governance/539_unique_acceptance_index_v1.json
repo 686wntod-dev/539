@@ -194,6 +194,24 @@
       "allowed_next_action": "建立機器可讀索引、preflight與fail-closed CI",
       "prohibited": [
         "宣稱防重複已部署，除非CI及Review證據齊備"
+      ],
+      "evidence_history": [
+        {
+          "captured_at": "2026-11-26T11:00:09Z",
+          "workflow_run_id": 45806503421,
+          "workflow_url": "https://github.com/686wntod-dev/539/actions/runs/45806503421",
+          "head_sha": "0c5c3e303c306253119e22c62dc05bff75c60856",
+          "job_id": 139863077578,
+          "result": "SUCCESS",
+          "checks": [
+            "10 unique problem IDs",
+            "duplicate rerun guard",
+            "validator+requirements+bundle replay fingerprint guard",
+            "default preflight production_authorized=false",
+            "Run10 incremental-only authorization"
+          ],
+          "disposition": "ACCEPTED_GOVERNANCE_PREFLIGHT_EVIDENCE; DOES_NOT_AUTHORIZE_PRODUCTION"
+        }
       ]
     }
   ],
