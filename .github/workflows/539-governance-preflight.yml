@@ -1,0 +1,39 @@
+name: 539 Governance Preflight
+
+on:
+  pull_request:
+    paths:
+      - "governance/**"
+      - ".github/workflows/539-cleanroom-replay.yml"
+      - ".github/workflows/539-r3-official-source-audit.yml"
+      - ".github/workflows/**"
+  push:
+    branches:
+      - main
+      - governance-dedup-v1
+    paths:
+      - "governance/**"
+      - ".github/workflows/**"
+
+permissions:
+  contents: read
+
+jobs:
+  preflight:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Validate unique acceptance index and duplicate guards
+        run: python governance/preflight.py --self-test
+      - name: Validate default execution preflight
+        run: python governance/preflight.py
+      - name: Validate Run10 incremental-only capture authorization
+        run: >-
+          python governance/preflight.py
+          --problem-id RUN10-906-8-DIFFERENCES
+          --action incremental
