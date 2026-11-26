@@ -7,7 +7,6 @@ on:
       - "gpt_rebuild/replay/**"
       - "gpt_rebuild/replay_bundle.zip"
       - "gpt_rebuild/requirements-replay.txt"
-      - ".github/workflows/539-cleanroom-replay.yml"
   pull_request:
     paths:
       - "gpt_rebuild/replay/**"
