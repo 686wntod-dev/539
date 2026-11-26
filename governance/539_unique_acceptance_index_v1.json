@@ -272,7 +272,7 @@
       "4043-row append-only candidate remains a separate version; do not promote or overwrite canonical data based on row count alone"
     ],
     "second_pass": {
-      "inventory_commit": "477f8cc53a4e5ad73fe2ae1b872c12a421f5261f",
+      "inventory_commit": "b7a58800bcc897048cbcc55800e65b09d7b41a2f",
       "verified_at": "2026-11-26",
       "exact_bytes_rehashed": [
         "AI3_Legacy_Full4037_Rebuilt_v2.csv: 4037 rows; SHA256 6c18084eab2966e4afc37e45fa916ad4a77414f07733a2947e321851c56e1628",
@@ -291,7 +291,8 @@
         "Stage179 raw serialized model bytes and executed training source not recovered in this pass; Stage181 AUD-01 remains an existing finding",
         "Stage179 model metadata must distinguish supervised 39,000-row classifiers from AI-1 deterministic frequency and AI-3 transition-count models"
       ],
-      "execution_scope": "Recovery/lineage reconciliation only; no retraining, replay, prediction, scoring, lock mutation, or accepted-scope rerun."
+      "execution_scope": "Recovery/lineage reconciliation only; no retraining, replay, prediction, scoring, lock mutation, or accepted-scope rerun.",
+      "parent_child_reconciliation": "Verified all 34 parent columns are value-identical between 4043 append-only candidate and evidence-enriched child; child adds exactly six official/secondary evidence columns. No parent values were overwritten."
     }
   }
 }
