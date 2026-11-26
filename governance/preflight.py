@@ -48,6 +48,7 @@ def self_test(d):
             except ValueError as e: assert "BLOCKED_DUPLICATE_REPLAY" in str(e)
             else: raise AssertionError("unchanged replay fingerprint allowed")
             assert "ALLOW_NEW_REPLAY_CI" in check(d,pid,"replay-ci",None,"new-run","new-code","new-requirements","same-bundle")
+            assert "ALLOW_NEW_REPLAY_CI" in check(d,pid,"replay-ci",None,"new-env-run",code,"changed-requirements",bundle)
     incident=item_for(d,"CI-CLEANROOM-REPLAY-20261126-RUN19").get("duplicate_trigger_incident",{})
     assert incident.get("run_id")==45804846897 and incident.get("artifact_id")==15108698201
     assert incident.get("artifact_digest")=="2b643635898b631f4bb4f4e686298acfd1edc37265fdff4378ebf2ff28fd1288"
