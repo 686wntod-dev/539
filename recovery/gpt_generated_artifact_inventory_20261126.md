@@ -147,3 +147,13 @@ Source URLs:
 - https://www.taiwanlottery.com/lotto/history/result_download/
 
 Disposition: `OFFICIAL_SOURCE_LEAD_DISCOVERED_NOT_DOWNLOADED`. The data.gov.tw dataset and official download page are source discovery only; no bytes, rows, or hashes were obtained in this turn. Do not mark any of the 3,130 rows verified until the resource bytes are retrieved, hashed, schema-mapped, and compared by draw date, issue ID, and five numbers. Any accepted data must be appended as a new evidence overlay; never overwrite the 4,034-row master or reopen the already accepted 904-row reconciliation.
+
+## Correction: 2014–2023 3,130-row comparison is already complete (2026-11-26)
+
+An additional Library search recovered two GPT project records that materially narrow the open evidence scope:
+- `539_2014-2023年度ZIP逐期交叉核對.csv`: ten annual ZIPs, 3,130 draws; 3,130 date matches; zero ZIP-only/master-only rows; zero issue-ID differences; zero number-set differences. Ten annual ZIP SHA256 values are recorded in the table.
+- `539_2014-2023_年度ZIP來源盤點與原始位元組驗收狀態_v1.csv`: confirms all ten annual ZIP objects are present in the Library listing, with object IDs and sizes (2.30–2.51 MB each), but records raw-byte materialization as denied/not verified.
+
+Fresh materialization was attempted for the 2014, 2015, 2016, 2017 and 2018 ZIP objects. The Files service returned: `This Project file does not have an authorized raw-byte materialization path.` Thus the exact unresolved gap is only raw-byte SHA re-attestation/source provenance; the 3,130-row date/period/number comparison is already completed and must not be rerun or reset to unverified.
+
+Prior reported ZIP hashes remain historical evidence, not freshly recomputed hashes in this run. The government dataset catalog (data.gov.tw dataset 72921) is confirmed as a primary-source catalog, but its linked CSV bytes were not retrieved in this turn. No row-level official-source promotion is claimed.
