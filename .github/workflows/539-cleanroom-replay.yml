@@ -1,0 +1,55 @@
+name: 539 Cleanroom Replay CI
+
+on:
+  push:
+    branches: [replay-ci-v1]
+    paths:
+      - "gpt_rebuild/replay/**"
+      - "gpt_rebuild/replay_bundle.zip"
+      - "gpt_rebuild/requirements-replay.txt"
+      - ".github/workflows/539-cleanroom-replay.yml"
+  pull_request:
+    paths:
+      - "gpt_rebuild/replay/**"
+      - "gpt_rebuild/replay_bundle.zip"
+      - "gpt_rebuild/requirements-replay.txt"
+      - ".github/workflows/539-cleanroom-replay.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  cleanroom-replay:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - name: Require the SHA-locked replay bundle
+        run: |
+          test -s gpt_rebuild/replay_bundle.zip || {
+            echo "::error::Missing gpt_rebuild/replay_bundle.zip. Upload the exact SHA-locked 1.22 MB Cleanroom bundle before replay."
+            exit 1
+          }
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+          cache-dependency-path: gpt_rebuild/requirements-replay.txt
+      - name: Install pinned replay environment
+        run: python -m pip install -r gpt_rebuild/requirements-replay.txt
+      - name: Extract immutable replay bundle
+        run: |
+          mkdir -p gpt_rebuild/replay
+          unzip -q gpt_rebuild/replay_bundle.zip -d gpt_rebuild/replay
+      - name: Execute all 12 historical lock replays
+        run: python gpt_rebuild/replay/validate_rebuild.py
+      - name: Upload replay evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: 539-cleanroom-replay-evidence
+          path: |
+            gpt_rebuild/replay/validation_output/validation_result.json
+          if-no-files-found: warn
+          retention-days: 90
