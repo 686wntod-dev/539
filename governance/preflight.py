@@ -36,6 +36,9 @@ def check(d,pid,action,location,ref,code_sha,bundle_sha):
 def self_test(d):
     assert d["production_authorized"] is False
     tests=[("CI-CLEANROOM-REPLAY-20261126-RUN19","5cfd2ce9cb1867be55458aee32336bc0257ce26a","eb7ee81ab8f065f15585bf5c6a0fa6d57f0b25a3","a3b55848501d9674c622ab99e0225a711c99385a"),("R3-API-AUDIT-300-20261126-RUN3","c15044cb175372fe01427cb5d2a5ef3e36c8a481",None,None)]
+    r3=item_for(d,"R3-API-AUDIT-300-20261126-RUN3")
+    assert r3.get("accepted_scope")=={"start_date":"2025-12-04","end_date":"2026-11-14","rows":300,"bundle_sha256":"02fd9ff8b17f2eaa57d1b29dcec45a09f789d810b8a6aba7bf068666ebc7d17a","result":"300 accounted; 299 exact; 1 closed accepted snapshot exception; 0 unresolved"}
+    assert r3.get("accepted_run_id")==45777143838
     for pid,ref,code,bundle in tests:
         try: check(d,pid,"rerun",None,None,None,None)
         except ValueError as e: assert "BLOCKED_DUPLICATE_RERUN" in str(e)
@@ -45,6 +48,9 @@ def self_test(d):
             except ValueError as e: assert "BLOCKED_DUPLICATE_REPLAY" in str(e)
             else: raise AssertionError("unchanged replay fingerprint allowed")
             assert "ALLOW_NEW_REPLAY_CI" in check(d,pid,"replay-ci",None,"new-run","new-code","same-bundle")
+    incident=item_for(d,"CI-CLEANROOM-REPLAY-20261126-RUN19").get("duplicate_trigger_incident",{})
+    assert incident.get("run_id")==45804846897 and incident.get("artifact_id")==15108698201
+    assert incident.get("artifact_digest")=="2b643635898b631f4bb4f4e686298acfd1edc37265fdff4378ebf2ff28fd1288"
     open_item=next(x for x in d["locked_items"] if x["status"]=="OPEN_SOURCE_NOT_RECOVERED")
     try: check(d,open_item["problem_id"],"source-search",None,None,None,None)
     except ValueError as e: assert "source-search requires" in str(e)
