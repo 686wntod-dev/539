@@ -53,7 +53,9 @@
       "accepted_execution_refs": [
         "5cfd2ce9cb1867be55458aee32336bc0257ce26a"
       ],
-      "accepted_run_id": 45777147538
+      "accepted_run_id": 45777147538,
+      "accepted_code_blob_sha": "eb7ee81ab8f065f15585bf5c6a0fa6d57f0b25a3",
+      "accepted_bundle_blob_sha": "a3b55848501d9674c622ab99e0225a711c99385a"
     },
     {
       "problem_id": "R3-API-AUDIT-300-20261126-RUN3",
