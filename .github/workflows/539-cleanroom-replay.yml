@@ -31,6 +31,8 @@ jobs:
             echo "::error::Missing gpt_rebuild/replay_bundle.zip. Upload the exact SHA-locked 1.22 MB Cleanroom bundle before replay."
             exit 1
           }
+      - name: Verify exact replay bundle SHA-256
+        run: echo "02fd9ff8b17f2eaa57d1b29dcec45a09f789d810b8a6aba7bf068666ebc7d17a  gpt_rebuild/replay_bundle.zip" | sha256sum --check -
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
