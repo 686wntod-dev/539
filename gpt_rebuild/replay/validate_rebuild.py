@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 from pathlib import Path
-import hashlib, json, sys, importlib.util
+import hashlib, json, sys, importlib.util, os
 import numpy as np
 import pandas as pd
 import joblib
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(os.environ.get("539_REPLAY_BUNDLE_ROOT", Path(__file__).resolve().parent)).resolve()
 
 def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
