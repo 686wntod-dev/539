@@ -42,9 +42,12 @@ jobs:
         run: python -m pip install -r gpt_rebuild/requirements-replay.txt
       - name: Extract immutable replay bundle
         run: |
-          mkdir -p gpt_rebuild/replay
-          unzip -q gpt_rebuild/replay_bundle.zip -d gpt_rebuild/replay
+          rm -rf gpt_rebuild/replay_bundle_contents
+          mkdir -p gpt_rebuild/replay_bundle_contents
+          unzip -q gpt_rebuild/replay_bundle.zip -d gpt_rebuild/replay_bundle_contents
       - name: Execute all 12 historical lock replays
+        env:
+          539_REPLAY_BUNDLE_ROOT: gpt_rebuild/replay_bundle_contents
         run: python gpt_rebuild/replay/validate_rebuild.py
       - name: Upload replay evidence
         if: always()
@@ -52,6 +55,6 @@ jobs:
         with:
           name: 539-cleanroom-replay-evidence
           path: |
-            gpt_rebuild/replay/validation_output/validation_result.json
+            gpt_rebuild/replay_bundle_contents/validation_output/validation_result.json
           if-no-files-found: warn
           retention-days: 90
