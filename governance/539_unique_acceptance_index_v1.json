@@ -313,7 +313,7 @@
   "production_authorized": false,
   "gpt_generated_artifact_recovery": {
     "inventory_path": "recovery/gpt_generated_artifact_inventory_20261126.md",
-    "inventory_commit": "eafb505ffb3ee4a7f0982c40c4ed0ad4add8911b",
+    "inventory_commit": "fe830fcad7ca6cc2b8c1891e50c44a9f9a95c7d7",
     "inventory_date": "2026-11-26",
     "policy": "GPT Library project artifacts are valid internal recovery sources. Do not ask the user for external backups as the default action. Reuse and hash-check existing GPT-created files; preserve the distinction between Cleanroom/Shadow replacements and historical Production originals.",
     "verified_this_run": [
