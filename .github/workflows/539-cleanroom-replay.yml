@@ -30,6 +30,8 @@ jobs:
           --problem-id CI-CLEANROOM-REPLAY-20261126-RUN19
           --action replay-ci
           --execution-ref "${{ github.sha }}"
+          --code-blob-sha "$(git rev-parse HEAD:gpt_rebuild/replay/validate_rebuild.py)"
+          --bundle-blob-sha "$(git rev-parse HEAD:gpt_rebuild/replay_bundle.zip)"
       - name: Require the SHA-locked replay bundle
         run: |
           test -s gpt_rebuild/replay_bundle.zip || {
