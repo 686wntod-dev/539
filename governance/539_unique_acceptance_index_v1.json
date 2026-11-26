@@ -74,7 +74,28 @@
         "覆寫候選檔或主檔",
         "將次級來源當成官方原始證據"
       ],
-      "note": "10/23 Run10 DUP002與R3 300期已關閉例外屬不同驗收範圍，不得混用。"
+      "note": "10/23 Run10 DUP002與R3 300期已關閉例外屬不同驗收範圍，不得混用。",
+      "evidence_history": [
+        {
+          "captured_at": "2026-11-26T10:44:20Z",
+          "workflow_run_id": 45804078358,
+          "workflow_url": "https://github.com/686wntod-dev/539/actions/runs/45804078358",
+          "artifact_id": 15108832201,
+          "artifact_sha256": "c08464cc53e13793b6039b012cce945dc1af25f41885f47cd881e798e4838d90",
+          "capture_scope": "2026-11 only (probe)",
+          "source_classification": "Taiwan Lottery website-internal API; not a published/stable API contract",
+          "results": {
+            "captured_months": 1,
+            "api_rows": 21,
+            "candidate_rows": 906,
+            "exact_date_and_five_number_matches": 12,
+            "api_only_new_dates": 9,
+            "same_date_number_conflicts": 0,
+            "candidate_reconciliation_status": "REVIEW_REQUIRED_DIFFERENCES"
+          },
+          "disposition": "APPEND_ONLY_CANDIDATE_EVIDENCE; NOT_OFFICIAL_HISTORICAL_PAGE_PROOF; DO_NOT_PROMOTE_OR_OVERWRITE_MASTER"
+        }
+      ]
     },
     {
       "problem_id": "SOURCE-CANONICAL-REGISTRY-V3",
