@@ -11,6 +11,8 @@ on:
     branches:
       - main
       - governance-dedup-v1
+      - replay-ci-v1
+      - replay-governance-preflight-v1
     paths:
       - "governance/**"
       - ".github/workflows/**"
