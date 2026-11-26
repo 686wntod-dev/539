@@ -14,6 +14,10 @@ on:
       - "gpt_rebuild/requirements-replay.txt"
   workflow_dispatch:
 
+concurrency:
+  group: 539-cleanroom-replay-${{ github.ref }}
+  cancel-in-progress: false
+
 permissions:
   contents: read
 
