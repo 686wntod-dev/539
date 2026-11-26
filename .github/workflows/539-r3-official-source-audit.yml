@@ -16,6 +16,11 @@ jobs:
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - name: Governance preflight — block duplicate 300-draw audit
+        run: >-
+          python governance/preflight.py
+          --problem-id R3-API-AUDIT-300-20261126-RUN3
+          --action rerun
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
