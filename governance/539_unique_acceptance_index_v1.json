@@ -244,6 +244,37 @@
         }
       ],
       "note": "機器可讀索引、fail-closed preflight、append-only replay fingerprint ledger及工作流程最小權限隔離已建立；最新push/PR治理CI通過。尚未取得獨立review、PR未合併，真正的成功後Actions append/push尚未在合法新Replay中驗證，因此不得標記完成或宣稱已部署。"
+    },
+    {
+      "problem_id": "DATA-4034-OFFICIAL-2014-2023",
+      "scope": "Stage207 4,034-row master: official per-draw source cross-check for 2014–2023 (3,130 rows only)",
+      "status": "NEW_EVIDENCE_REQUIRED",
+      "evidence_pointer": "https://data.gov.tw/dataset/72921",
+      "allowed_next_action": "Retrieve the Treasury Administration CSV resource from the newly discovered official dataset source, preserve raw bytes and SHA256, map by date/issue ID/five numbers, then append an evidence-only overlay. Do not ask the user for backups and do not rerun Stage207 structural QA or the accepted 904-row API reconciliation.",
+      "prohibited": [
+        "Overwrite 4034-row master",
+        "Re-run closed structural QA or 904-row reconciliation",
+        "Mark rows verified before raw source bytes and row-level comparison are complete",
+        "Treat a timed-out download link as retrieved evidence"
+      ],
+      "source_leads": [
+        {
+          "url": "https://data.gov.tw/dataset/72921",
+          "classification": "GOVERNMENT_OPEN_DATASET_ORIGINAL_SOURCE_CATALOG",
+          "retrieved": "page metadata only"
+        },
+        {
+          "url": "https://gaze.nta.gov.tw/dntmb/OpenData/csvDw?ntaCode=D423F",
+          "classification": "CSV_RESOURCE_LINKED_FROM_GOVERNMENT_DATASET",
+          "retrieval_status": "TIMEOUT_NOT_DOWNLOADED"
+        },
+        {
+          "url": "https://www.taiwanlottery.com/lotto/history/result_download/",
+          "classification": "TAIWAN_LOTTERY_OFFICIAL_ANNUAL_DOWNLOAD_INDEX",
+          "retrieved": "annual-year listing 103–112 observed"
+        }
+      ],
+      "note": "This is a distinct unfinished row-level evidence scope from the already closed 904-row API reconciliation and Stage207 structural QA. No raw data or row verification was performed in this discovery step."
     }
   ],
   "execution_contract": {
@@ -338,6 +369,13 @@
         "Immutable forward lock and official result score accumulation"
       ],
       "inventory_commit": "66014074c73711466d10ebca6394690478ad3469"
+    },
+    "stage207_official_source_lead": {
+      "problem_id": "DATA-4034-OFFICIAL-2014-2023",
+      "unverified_rows": 3130,
+      "source_discovery": "data.gov.tw dataset 72921; Taiwan Lottery official annual download index",
+      "download_status": "TIMEOUT_NOT_DOWNLOADED",
+      "next_step": "Obtain official CSV bytes, hash, map records and compare only the 3130 uncovered rows; append-only evidence overlay."
     }
   }
 }
