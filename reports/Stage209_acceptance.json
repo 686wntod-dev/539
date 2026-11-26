@@ -1,0 +1,21 @@
+{
+  "stage": "Stage209",
+  "status": "PRE_DRAW_SHADOW_LOCK_CREATED",
+  "lock_id": "539-STAGE209-20261126-e2a48c0261120749",
+  "lock_sha256": "e2a48c02611207499d21a744a5477c209842473334ae5d9b14081acec48c772b",
+  "master_rows": 4045,
+  "master_sha256": "dced9f90b127aa542552820d925c68d028c1679bfb9097117a0279776b8bcf64",
+  "repeat_rebuild_hashes_identical": true,
+  "models": 7,
+  "all_rankings_39_complete": true,
+  "positive_reverse_overlap": [
+    "01",
+    "14",
+    "16",
+    "19",
+    "23",
+    "24"
+  ],
+  "target_period": "115000286_INFERRED_NOT_OFFICIAL_CAPTURE",
+  "production_authorized": false
+}
