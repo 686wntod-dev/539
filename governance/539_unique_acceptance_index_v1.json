@@ -189,9 +189,9 @@
     {
       "problem_id": "GOV-DUP-20261126-001",
       "scope": "歷史驗收索引與執行前防重複控制",
-      "status": "OPEN_SOURCE_NOT_RECOVERED",
+      "status": "NEW_EVIDENCE_REQUIRED",
       "evidence_pointer": "Issue #3; comment 7189643292",
-      "allowed_next_action": "建立機器可讀索引、preflight與fail-closed CI",
+      "allowed_next_action": "沿用本problem_id；取得獨立PR review並合併後，於未來合法的新Replay驗證Actions append/push；不得為測試而重跑已接受Run #19/#20",
       "prohibited": [
         "宣稱防重複已部署，除非CI及Review證據齊備"
       ],
@@ -211,8 +211,24 @@
             "Run10 incremental-only authorization"
           ],
           "disposition": "ACCEPTED_GOVERNANCE_PREFLIGHT_EVIDENCE; DOES_NOT_AUTHORIZE_PRODUCTION"
+        },
+        {
+          "captured_at": "2026-11-26T11:20:00Z",
+          "workflow_run_id": 45809562107,
+          "workflow_url": "https://github.com/686wntod-dev/539/actions/runs/45809562107",
+          "head_sha": "80cdb9a7a92a4246388d50c026cc5234abb8f4f7",
+          "result": "SUCCESS",
+          "checks": [
+            "least-privilege replay job contents:read",
+            "separate append job contents:write after replay success only",
+            "manual workflow_dispatch restricted to replay-ci-v1",
+            "bounded official capture guard",
+            "unique acceptance and duplicate replay guards"
+          ],
+          "disposition": "CI_VALIDATED; PR_REVIEW_AND_MERGE_PENDING; REAL_ACTIONS_APPEND_PUSH_NOT_YET_EXERCISED"
         }
-      ]
+      ],
+      "note": "機器可讀索引、fail-closed preflight、append-only replay fingerprint ledger及工作流程最小權限隔離已建立；最新push/PR治理CI通過。尚未取得獨立review、PR未合併，真正的成功後Actions append/push尚未在合法新Replay中驗證，因此不得標記完成或宣稱已部署。"
     }
   ],
   "execution_contract": {
