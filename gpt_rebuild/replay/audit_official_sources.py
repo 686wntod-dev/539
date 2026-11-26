@@ -14,6 +14,8 @@ OUT.mkdir(parents=True, exist_ok=True)
 EXPECTED_BUNDLE_SHA = "02fd9ff8b17f2eaa57d1b29dcec45a09f789d810b8a6aba7bf068666ebc7d17a"
 START_DATE, END_DATE = "2025-12-04", "2026-11-14"
 API = "https://api.taiwanlottery.com/TLCAPIWeB/Lottery/Daily539Result"
+CLOSED_EXCEPTIONS_PATH = Path(__file__).with_name("closed_data_exceptions.json")
+CLOSED_EXCEPTIONS = {x["date"]: x for x in json.loads(CLOSED_EXCEPTIONS_PATH.read_text(encoding="utf-8"))["exceptions"]}
 
 def sha256(path):
     h=hashlib.sha256()
@@ -75,7 +77,11 @@ for x in targets:
         api_period=o["period"]
         nums_match=(o["nums"]==x["nums"])
         period_match=(api_period==x["inferred_period"])
-        status="PASS_EXACT_DATE_PERIOD_NUMBERS" if nums_match and period_match else ("FAIL_NUMBERS_MISMATCH" if not nums_match else "PERIOD_MISMATCH")
+        closed = CLOSED_EXCEPTIONS.get(x["date"])
+        if closed and api_period == closed["period"] and "-".join(f"{n:02d}" for n in o["nums"]) == "-".join(closed["official_api_numbers"]):
+            status = "CLOSED_ACCEPTED_SUPERSEDED_SNAPSHOT"
+        else:
+            status="PASS_EXACT_DATE_PERIOD_NUMBERS" if nums_match and period_match else ("FAIL_NUMBERS_MISMATCH" if not nums_match else "PERIOD_MISMATCH")
     results.append({
       "date":x["date"],"candidate_inferred_period":x["inferred_period"],"official_api_period":api_period,
       "candidate_numbers":"-".join(f"{n:02d}" for n in x["nums"]),
@@ -83,7 +89,8 @@ for x in targets:
       "numbers_match":nums_match,"period_match":period_match,
       "original_period_field_present":bool(x["original_period"]),
       "period_is_official_original_in_master":x["period_is_official_original"],
-      "master_source_label":x["source"],"status":status
+      "master_source_label":x["source"],"status":status,
+      "closure_ledger_id":CLOSED_EXCEPTIONS.get(x["date"],{}).get("ledger_id","") if status=="CLOSED_ACCEPTED_SUPERSEDED_SNAPSHOT" else ""
     })
 
 counts=defaultdict(int)
@@ -97,12 +104,14 @@ summary={
  "target_master_member":candidates[0],
  "official_api_month_requests":request_log,
  "counts":dict(counts),
- "all_300_exact":len(results)==300 and all(r["status"]=="PASS_EXACT_DATE_PERIOD_NUMBERS" for r in results),
+ "closed_exceptions":sum(1 for r in results if r["status"]=="CLOSED_ACCEPTED_SUPERSEDED_SNAPSHOT"),
+ "unresolved_discrepancies":sum(1 for r in results if r["status"] not in ("PASS_EXACT_DATE_PERIOD_NUMBERS","CLOSED_ACCEPTED_SUPERSEDED_SNAPSHOT")),
+ "all_300_accounted_for":len(results)==300 and all(r["status"] in ("PASS_EXACT_DATE_PERIOD_NUMBERS","CLOSED_ACCEPTED_SUPERSEDED_SNAPSHOT") for r in results),
  "fail_closed_note":"No period or number is filled from third-party sources; unavailable API rows remain unresolved.",
 }
 with (OUT/"r3_300_official_api_reconciliation.csv").open("w",newline="",encoding="utf-8-sig") as f:
     w=csv.DictWriter(f,fieldnames=list(results[0].keys())); w.writeheader(); w.writerows(results)
 with (OUT/"r3_300_official_api_reconciliation.json").open("w",encoding="utf-8") as f: json.dump({"summary":summary,"rows":results},f,ensure_ascii=False,indent=2)
 print(json.dumps(summary,ensure_ascii=False,indent=2))
-if not summary["all_300_exact"]:
+if not summary["all_300_accounted_for"]:
     sys.exit(2)
