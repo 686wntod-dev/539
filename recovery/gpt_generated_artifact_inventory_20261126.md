@@ -110,3 +110,27 @@ This pass did not retrain models, replay Stage179/181, regenerate predictions, s
 
 
 Additional byte-content reconciliation: the 4,043-row parent candidate and its 4,043-row evidence-enriched child have identical values in all 34 parent columns; the child adds exactly six evidence columns (`official_evidence_status`, `official_evidence_source`, `official_evidence_url`, `official_evidence_checked_at`, `secondary_crosscheck_source`, `secondary_crosscheck_url`). This confirms the Stage173 evidence enrichment is append-only at the column level and did not rewrite any parent master values.
+
+## Stage206 authoritative source-identity correction (2026-11-26)
+
+The GPT Library copy of Stage206 (`539_Stage206_專案來源身分重整與阻塞根因修正_2026-11-24.md`) is now treated as the controlling clarification for interpreting older Stage184–205 source-delivery language. The user explicitly established that the project's data-processing system artifacts were created in ChatGPT. Therefore old SHA declarations and filenames in prior reports are not, by themselves, proof that external historical Production originals ever existed.
+
+### Retired assumptions (do not repeat)
+- Do not ask the user to locate external backups or old machine files as the default recovery action.
+- Do not treat old SRC-01 Canonical Registry, SRC-02 historical Production Runtime, or SRC-03/04/05 A/B R3 exact-byte declarations as mandatory historical files unless an independent creation/deployment record establishes that those external artifacts existed.
+- Do not rerun completed Library/repository/ZIP scans, 4034 base QA, 4042/4043 replays, Stage183 scorer/aggregator tests, or Stage185 Production Gate tests.
+- Do not retroactively create or backdate a Production identity, external lock, or deployment receipt.
+
+### Correct identity model
+1. `AI_GENERATED_ARTIFACT`: a program, model, Registry, Runtime, lock, report, or prediction generated in ChatGPT; preserve its actual available bytes/hash and creation evidence.
+2. `CLEANROOM_REBUILD`: a new, reproducible version created from retained source/config/data; assign new version identity and hashes.
+3. `USER_OR_EXTERNAL_SOURCE`: only where the specific source evidence supports that classification.
+4. `PRODUCTION_DEPLOYED`: only after a new real deployment and platform evidence (release/change ID, actual loaded code/runtime, scheduler/worker/service and fallback state).
+
+### Stage206 / Stage207 carry-forward
+- Stage206 baseline QA: 4,034 rows, 2014-01-01–2026-11-12, master SHA `74ad955b47cfb04c6c8f3a3955ddbf6a50cb5a922c10d33ab5bf94fc8f5af9b7`; Registry is `CLEANROOM_ONLY_NOT_CANONICAL`; `production_authorized=false`.
+- Stage207 4,034-row structural checks passed, but official row-level evidence remains partial: 904/904 API date+period matches, 903/904 number matches with the existing DUP-002 exception; 3,130 rows for 2014–2023 remain without official per-draw cross-check in that Stage's scope. Do not rerun completed structural checks or the 904-row reconciliation; any future official evidence must be a new append-only incremental overlay.
+- Historical model performance is not established by source identity correction. Cleanroom R3 walk-forward, leakage review, positive pool vs random baseline, and immutable forward locks remain substantive validation tasks.
+
+### Operational disposition
+The old external-original retrieval framing for SRC-01 through SRC-05 is retired as a default prerequisite. Their historical identity is `NOT_ESTABLISHED`, not `MISSING_FROM_USER`. Work proceeds with GPT-created evidence and new Cleanroom identities. SRC-06 is redefined as a future deployment task only if external Production is actually desired; no past deployment is presumed. Production remains HOLD until a new, explicitly scoped deployment and model/data validation are completed.
