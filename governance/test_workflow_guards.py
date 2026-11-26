@@ -1,7 +1,7 @@
 from pathlib import Path
 
 capture = Path(".github/workflows/539-official-capture.yml").read_text(encoding="utf-8")
-assert "options:\\n          - probe" in capture
+assert "options:\n          - probe" in capture
 assert "full" not in capture
 assert '--mode "probe"' in capture
 assert "--problem-id RUN10-906-8-DIFFERENCES" in capture
@@ -13,8 +13,8 @@ assert ".github/workflows/539-official-capture.yml" not in push_block
 replay = Path(".github/workflows/539-cleanroom-replay.yml").read_text(encoding="utf-8")
 replay_job = replay.split("  cleanroom-replay:", 1)[1].split("  append-replay-ledger:", 1)[0]
 append_job = replay.split("  append-replay-ledger:", 1)[1]
-assert "permissions:\\n      contents: read" in replay_job
-assert "permissions:\\n      contents: write" in append_job
+assert "permissions:\n      contents: read" in replay_job
+assert "permissions:\n      contents: write" in append_job
 assert "contents: write" not in replay_job
 assert "github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/replay-ci-v1'" in replay
 assert "needs.cleanroom-replay.result == 'success' && github.event_name != 'pull_request'" in append_job
