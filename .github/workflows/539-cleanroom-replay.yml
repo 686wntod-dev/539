@@ -34,6 +34,7 @@ jobs:
           --action replay-ci
           --execution-ref "${{ github.sha }}"
           --code-blob-sha "$(git rev-parse HEAD:gpt_rebuild/replay/validate_rebuild.py)"
+          --requirements-blob-sha "$(git rev-parse HEAD:gpt_rebuild/requirements-replay.txt)"
           --bundle-blob-sha "$(git rev-parse HEAD:gpt_rebuild/replay_bundle.zip)"
       - name: Require the SHA-locked replay bundle
         run: |
