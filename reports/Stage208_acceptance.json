@@ -1,0 +1,68 @@
+{
+  "stage": "Stage208",
+  "status": "HISTORICAL_ROLLING_ORIGIN_SHADOW_DIAGNOSTIC_ONLY",
+  "master": {
+    "file": "AI3_Legacy_Full4037_Rebuilt_v2.csv",
+    "rows": 4037,
+    "sha256": "6c18084eab2966e4afc37e45fa916ad4a77414f07733a2947e321851c56e1628",
+    "date_start": "2014-01-01",
+    "date_end": "2026-11-16"
+  },
+  "validation": {
+    "target_draws": 50,
+    "first_target": "2026-09-19",
+    "last_target": "2026-11-16",
+    "training_window_draws": 1000,
+    "strict_temporal_order": true,
+    "features_use_only_pre_target_draws": true,
+    "no_existing_locks_modified": true,
+    "retrospective_not_prospective_sealed": true,
+    "repeat_run_csv_and_json_sha_match": true
+  },
+  "AI1_W20": {
+    "total_pool10_hits": 58,
+    "mean_hits_per_draw": 1.16,
+    "bootstrap95_mean_ci": [
+      0.92,
+      1.4
+    ],
+    "draws_with_zero": 13,
+    "draws_with_2plus": 18,
+    "random_pool10_expected_hits_per_draw": 1.2820512820512822
+  },
+  "AI3_K2000": {
+    "total_pool10_hits": 57,
+    "mean_hits_per_draw": 1.14,
+    "bootstrap95_mean_ci": [
+      0.9,
+      1.38
+    ],
+    "draws_with_zero": 13,
+    "draws_with_2plus": 17,
+    "random_pool10_expected_hits_per_draw": 1.2820512820512822
+  },
+  "R3_CR1_LOGIT_reverse": {
+    "correct_exclusions": 426,
+    "excluded_slots": 500,
+    "exclusion_precision": 0.852,
+    "false_exclusions": 74,
+    "wilson95_precision_ci": [
+      0.8181938697042727,
+      0.8804385946107945
+    ],
+    "random_exclusion_precision_baseline": 0.8717948717948718,
+    "random_expected_false_exclusions": 64.1025641025641
+  },
+  "artifacts": {
+    "script_sha256": "3661abeba081dbd86ca3d9fbbddc76b2ce0d97f78b6dc5a922268eaddf9d075c",
+    "csv_sha256": "4d26aabe48128d24cc15468e2356885c736e8c81077002fef728733acb400c4c",
+    "acceptance_sha256": "fd85cd62c2e6e94832d9f59f054cea4ad7d92ef66c8a447b6b0c338e34d7669f"
+  },
+  "limitations": [
+    "Retrospective rolling-origin replay, not prospective immutable lock evidence.",
+    "AI1/AI3 are Cleanroom reconstructions, not Stage179 original trainers.",
+    "R3 is CR1 18F LOGIT reverse challenger, not historical Stage179 R3.",
+    "50 targets are insufficient to certify 90% exclusion precision or model superiority.",
+    "No Production promotion, consensus vote, or prediction lock is created."
+  ]
+}
