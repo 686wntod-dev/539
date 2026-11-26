@@ -134,49 +134,60 @@
     {
       "problem_id": "SOURCE-CANONICAL-REGISTRY-V3",
       "scope": "Canonical Registry v3 Active原始來源／簽章",
-      "status": "OPEN_SOURCE_NOT_RECOVERED",
+      "status": "NEW_EVIDENCE_REQUIRED",
       "evidence_pointer": "Issue #3; comment 7189419068",
-      "allowed_next_action": "沿用 GPT Library 與 repo 內既有 GPT_REBUILT_REGISTRY_V1、Stage/manifest 做內部版本化重建與差異對照；不可再把要求使用者提供外部備份當預設下一步，也不可將重建版冒稱 Canonical Registry v3 Active。",
+      "allowed_next_action": "Use GPT Library/Stage/lock/manifests as AI_GENERATED_ARTIFACT evidence; build and validate new versioned Cleanroom replacements where needed. Do not search for presumed external original files or ask the user for backups. Never relabel a rebuild as historical Production.",
       "prohibited": [
         "重查目前repo相同三個分支",
         "以GPT_REBUILT_REGISTRY_V1冒充Canonical Registry v3"
       ],
-      "gpt_artifact_note": "GPT 已建立 GPT_REBUILT_REGISTRY_V1 及多份 Registry/Stage 證據；本輪新增 recovery inventory。Canonical Registry v3 Active 的原始身分仍需獨立證明。"
+      "gpt_artifact_note": "GPT 已建立 GPT_REBUILT_REGISTRY_V1 及多份 Registry/Stage 證據；本輪新增 recovery inventory。Canonical Registry v3 Active 的原始身分仍需獨立證明。",
+      "legacy_status_disposition": "RETIRED_BY_STAGE206_NOT_AN_EXTERNAL_ORIGINAL_DELIVERY_BLOCKER",
+      "historical_identity": "NOT_ESTABLISHED",
+      "note": " Stage206 (2026-11-24) supersedes the assumption that these ChatGPT-created artifacts must be recovered from an external historical Production system."
     },
     {
       "problem_id": "SOURCE-HISTORICAL-PRODUCTION-FORMAL7",
       "scope": "歷史Production Formal7原始程式、訓練來源及lineage",
-      "status": "OPEN_SOURCE_NOT_RECOVERED",
+      "status": "NEW_EVIDENCE_REQUIRED",
       "evidence_pointer": "Issue #3; comment 7189419068",
-      "allowed_next_action": "沿用 GPT Library 已恢復的 Cleanroom Runtime v1/v2、CR1 trainer、4037/4042 master、7-model locks 與 manifests 做內部可重現性工作；不得要求使用者重新提供已存在檔案，不得冒稱歷史 Production。",
+      "allowed_next_action": "Use GPT Library/Stage/lock/manifests as AI_GENERATED_ARTIFACT evidence; build and validate new versioned Cleanroom replacements where needed. Do not search for presumed external original files or ask the user for backups. Never relabel a rebuild as historical Production.",
       "prohibited": [
         "重查目前repo相同三個分支",
         "以Cleanroom replacement lineage冒充歷史Production"
       ],
-      "gpt_artifact_note": "本輪已從 GPT Library 重新取得並重算 Runtime v2、trainer、master_4042、Formal7 lock 等精確 SHA；清單見 recovery/gpt_generated_artifact_inventory_20261126.md。"
+      "gpt_artifact_note": "本輪已從 GPT Library 重新取得並重算 Runtime v2、trainer、master_4042、Formal7 lock 等精確 SHA；清單見 recovery/gpt_generated_artifact_inventory_20261126.md。",
+      "legacy_status_disposition": "RETIRED_BY_STAGE206_NOT_AN_EXTERNAL_ORIGINAL_DELIVERY_BLOCKER",
+      "historical_identity": "NOT_ESTABLISHED",
+      "note": " Stage206 (2026-11-24) supersedes the assumption that these ChatGPT-created artifacts must be recovered from an external historical Production system."
     },
     {
       "problem_id": "SOURCE-R3-AB-20261117",
       "scope": "R3 2026-11-17 A-line trainer exact bytes、B-line backtest/program/lock",
-      "status": "OPEN_SOURCE_NOT_RECOVERED",
+      "status": "NEW_EVIDENCE_REQUIRED",
       "evidence_pointer": "Issue #3; comment 7189419068",
-      "allowed_next_action": "沿用 GPT Library 已有的 R3-HGB-NoPP 32F Shadow script/schema/lock/manifest 與既有 Stage 做內部差異分析；不得要求使用者重新提供已存在的 Shadow 工件，也不得將其冒充 2026-11-17 A/B 原始 Production 工件。",
+      "allowed_next_action": "Use GPT Library/Stage/lock/manifests as AI_GENERATED_ARTIFACT evidence; build and validate new versioned Cleanroom replacements where needed. Do not search for presumed external original files or ask the user for backups. Never relabel a rebuild as historical Production.",
       "prohibited": [
         "重跑R3-HGB-NoPP-Shadow replay以代替缺失原件",
         "將Shadow challenger稱為原始Production R3"
       ],
-      "gpt_artifact_note": "R3-HGB-NoPP 2026-11-16 Shadow challenger 的 script/schema/lock 已在本輪重算 SHA；serialized model SHA 仍有既有 manifest 記錄，詳見 recovery inventory。"
+      "gpt_artifact_note": "R3-HGB-NoPP 2026-11-16 Shadow challenger 的 script/schema/lock 已在本輪重算 SHA；serialized model SHA 仍有既有 manifest 記錄，詳見 recovery inventory。",
+      "legacy_status_disposition": "RETIRED_BY_STAGE206_NOT_AN_EXTERNAL_ORIGINAL_DELIVERY_BLOCKER",
+      "historical_identity": "NOT_ESTABLISHED",
+      "note": " Stage206 (2026-11-24) supersedes the assumption that these ChatGPT-created artifacts must be recovered from an external historical Production system."
     },
     {
       "problem_id": "SOURCE-TSA-WORM-DEPLOYMENT",
       "scope": "外部TSA/WORM不可竄改時間戳及scheduler/worker/service部署收據",
-      "status": "OPEN_SOURCE_NOT_RECOVERED",
+      "status": "NEW_EVIDENCE_REQUIRED",
       "evidence_pointer": "Issue #3",
-      "allowed_next_action": "先整理 GPT 建立的 lock、Stage、manifest、CI 與執行紀錄；僅將其標記為應用層/CI 證據，不將其誤稱外部 TSA/WORM 或實際 Production deployment。",
+      "allowed_next_action": "Only if external Production is explicitly pursued: create a new deployment and collect actual platform release/change, loaded runtime, scheduler/worker/service and fallback evidence. Do not seek presumed past receipts or treat GitHub artifact retention as WORM/TSA.",
       "prohibited": [
         "將GitHub Artifact保存期限視為WORM/TSA證據"
       ],
-      "gpt_artifact_note": "本輪確認多份 GPT 建立的時間戳、鎖檔、Manifest、Runtime QA；這些可以沿用，但本身不是外部不可竄改時間戳或部署收據。"
+      "gpt_artifact_note": "本輪確認多份 GPT 建立的時間戳、鎖檔、Manifest、Runtime QA；這些可以沿用，但本身不是外部不可竄改時間戳或部署收據。",
+      "legacy_status_disposition": "NO_PAST_DEPLOYMENT_PRESUMED",
+      "note": " Stage206 confirms no prior external Production deployment is presumed."
     },
     {
       "problem_id": "R3-FIXED10-FORWARD-BLINDTEST",
@@ -293,6 +304,40 @@
       ],
       "execution_scope": "Recovery/lineage reconciliation only; no retraining, replay, prediction, scoring, lock mutation, or accepted-scope rerun.",
       "parent_child_reconciliation": "Verified all 34 parent columns are value-identical between 4043 append-only candidate and evidence-enriched child; child adds exactly six official/secondary evidence columns. No parent values were overwritten."
+    },
+    "stage206_authoritative_reclassification": {
+      "source_document": "539_Stage206_專案來源身分重整與阻塞根因修正_2026-11-24.md",
+      "controlling_rule": "ChatGPT-created project artifacts are AI_GENERATED_ARTIFACT unless specific external provenance is independently evidenced; do not presume an external historical Production original existed.",
+      "legacy_src_01_to_05": "RETIRED_AS_EXTERNAL_ORIGINAL_RETRIEVAL_PREREQUISITE; historical identity NOT_ESTABLISHED; proceed with GPT-created evidence and versioned Cleanroom replacements.",
+      "src_06": "FUTURE_DEPLOYMENT_TASK_ONLY_IF_EXTERNAL_PRODUCTION_IS_DESIRED; no past deployment presumed.",
+      "stage206_baseline": {
+        "rows": 4034,
+        "from": "2014-01-01",
+        "to": "2026-11-12",
+        "master_sha256": "74ad955b47cfb04c6c8f3a3955ddbf6a50cb5a922c10d33ab5bf94fc8f5af9b7",
+        "registry_status": "CLEANROOM_ONLY_NOT_CANONICAL",
+        "production_authorized": false
+      },
+      "stage207_data_boundary": {
+        "structural_checks": "PASS",
+        "api_period_matches": "904/904",
+        "api_number_matches": "903/904",
+        "known_exception": "existing DUP-002",
+        "unverified_official_draws": "3130 rows (2014–2023)",
+        "instruction": "Do not rerun structural QA or completed 904-row reconciliation; future evidence must be append-only incremental."
+      },
+      "no_repeat_actions": [
+        "Do not ask user for external backup/old machine files as default",
+        "Do not rerun completed 4034 QA, 4042/4043 replays, Stage183 scorer tests, or Stage185 gate tests",
+        "Do not backdate Production identity, locks, or deployment receipts"
+      ],
+      "next_substantive_validation": [
+        "Cleanroom R3 full walk-forward vs random baseline with confidence intervals",
+        "Program-level leakage and cutoff review",
+        "Positive pool vs random baseline",
+        "Immutable forward lock and official result score accumulation"
+      ],
+      "inventory_commit": "66014074c73711466d10ebca6394690478ad3469"
     }
   }
 }
