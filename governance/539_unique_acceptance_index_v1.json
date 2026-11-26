@@ -67,7 +67,9 @@
         "bundle_sha256": "02fd9ff8b17f2eaa57d1b29dcec45a09f789d810b8a6aba7bf068666ebc7d17a",
         "artifact_id": 15108698201,
         "artifact_digest": "2b643635898b631f4bb4f4e686298acfd1edc37265fdff4378ebf2ff28fd1288",
-        "disposition": "UNPLANNED_DUPLICATE_TRIGGER_FROM_PR_WORKFLOW_PATH_FILTER; RETAIN AS ADDITIONAL EVIDENCE; NO FURTHER IDENTICAL REPLAY"
+        "disposition": "UNPLANNED_DUPLICATE_TRIGGER_FROM_PR_WORKFLOW_PATH_FILTER; RETAIN AS ADDITIONAL EVIDENCE; NO FURTHER IDENTICAL REPLAY",
+        "artifact_size_bytes": 1036,
+        "retention_expires_at": "2027-02-24T10:49:12Z"
       }
     },
     {
@@ -85,7 +87,14 @@
       "accepted_execution_refs": [
         "c15044cb175372fe01427cb5d2a5ef3e36c8a481"
       ],
-      "accepted_run_id": 45777143838
+      "accepted_run_id": 45777143838,
+      "accepted_scope": {
+        "start_date": "2025-12-04",
+        "end_date": "2026-11-14",
+        "rows": 300,
+        "bundle_sha256": "02fd9ff8b17f2eaa57d1b29dcec45a09f789d810b8a6aba7bf068666ebc7d17a",
+        "result": "300 accounted; 299 exact; 1 closed accepted snapshot exception; 0 unresolved"
+      }
     },
     {
       "problem_id": "RUN10-906-8-DIFFERENCES",
