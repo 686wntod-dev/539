@@ -6,6 +6,10 @@ on:
     paths:
       - "gpt_rebuild/replay_bundle.zip"
       - "gpt_rebuild/replay/audit_official_sources.py"
+concurrency:
+  group: 539-r3-fixed300-source-audit
+  cancel-in-progress: false
+
 permissions:
   contents: read
   actions: read
