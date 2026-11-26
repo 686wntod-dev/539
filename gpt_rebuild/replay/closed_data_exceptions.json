@@ -1,0 +1,34 @@
+{
+  "ledger_version": 1,
+  "exceptions": [
+    {
+      "ledger_id": "DATA-2026-10-23-115000257",
+      "status": "CLOSED_ACCEPTED_SUPERSEDED_SNAPSHOT",
+      "date": "2026-10-23",
+      "period": "115000257",
+      "legacy_snapshot_numbers": [
+        "03",
+        "14",
+        "17",
+        "27",
+        "37"
+      ],
+      "accepted_corrected_numbers": [
+        "03",
+        "07",
+        "14",
+        "17",
+        "27"
+      ],
+      "official_api_numbers": [
+        "03",
+        "07",
+        "14",
+        "17",
+        "27"
+      ],
+      "decision": "Closed at user's direction. Do not reopen or report as a new error in recurring audits. Retain evidence; do not alter immutable source bundle.",
+      "reopen_only_if": "New official source revision contradicts accepted corrected numbers, or active canonical master regresses."
+    }
+  ]
+}
