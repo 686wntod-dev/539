@@ -1,0 +1,408 @@
+{
+  "schema_version": "1.0.0",
+  "project": "Taiwan Daily 539",
+  "index_id": "539-UNIQUE-ACCEPTANCE-INDEX-V1",
+  "governance_issue": "https://github.com/686wntod-dev/539/issues/3",
+  "governance_defect_id": "GOV-DUP-20261126-001",
+  "created_from_commit": "249bb245e248d8456a119abdb261ebcf5afe7c27",
+  "policy": {
+    "execution_preflight_required": true,
+    "append_only": true,
+    "closed_items_rerun": false,
+    "inaccessible_is_not_unverified": true,
+    "missing_original_source_is_not_permission_to_revalidate_completed_data": true,
+    "new_evidence_required_to_reopen": true,
+    "same_root_cause_same_problem_id": true,
+    "no_production_authorization_by_this_index": true,
+    "replay_execution_ref_required": true
+  },
+  "statuses": [
+    "PASS_CLOSED",
+    "PASS_RETAINED_NO_RERUN",
+    "OPEN_SOURCE_NOT_RECOVERED",
+    "NOT_ACCESSIBLE_IN_THIS_RUN",
+    "NEW_EVIDENCE_REQUIRED",
+    "REGRESSION_CONFIRMED"
+  ],
+  "locked_items": [
+    {
+      "problem_id": "DATA-4042-RESTORE-REPLAY",
+      "scope": "既有4042期主檔恢復及7/7模型獨立重播（Stage121歷史驗收）",
+      "status": "PASS_RETAINED_NO_RERUN",
+      "evidence_pointer": "Project historical record: Stage121 acceptance; details retained in prior project conversation",
+      "sha256": null,
+      "allowed_next_action": "只引用既有驗收；若有新資料只做增量",
+      "prohibited": [
+        "重做4042期恢復",
+        "重跑相同7/7模型獨立重播",
+        "因本輪工作區不可讀而改列未驗證"
+      ],
+      "note": "此專案摘要未提供Stage121原始SHA，故不臆造；後續若能讀取原報告，只追加其真實SHA。"
+    },
+    {
+      "problem_id": "CI-CLEANROOM-REPLAY-20261126-RUN19",
+      "scope": "Cleanroom Replay CI Run #19",
+      "status": "PASS_RETAINED_NO_RERUN",
+      "evidence_pointer": "https://github.com/686wntod-dev/539/actions/runs/45777147538",
+      "artifact_sha256": "02fd9ff8b17f2eaa57d1b29dcec45a09f789d810b8a6aba7bf068666ebc7d17a",
+      "artifact_digest": "fe5481a146210f9f5e9a32623be3d33d9dcbb76041ccecb5f9ac3de2a99ce54c",
+      "allowed_next_action": "引用既有12/12 replay結果；僅新程式變更時執行新的CI run",
+      "prohibited": [
+        "為了重新確認而重跑同一commit的Run #19"
+      ],
+      "accepted_execution_refs": [
+        "5cfd2ce9cb1867be55458aee32336bc0257ce26a",
+        "eea9114b80fa6a944df5089e7e63c1b7d8ae626f"
+      ],
+      "accepted_run_id": 45777147538,
+      "accepted_code_blob_sha": "eb7ee81ab8f065f15585bf5c6a0fa6d57f0b25a3",
+      "accepted_bundle_blob_sha": "a3b55848501d9674c622ab99e0225a711c99385a",
+      "duplicate_trigger_incident": {
+        "run_id": 45804846897,
+        "workflow_run_url": "https://github.com/686wntod-dev/539/actions/runs/45804846897",
+        "merge_commit": "eea9114b80fa6a944df5089e7e63c1b7d8ae626f",
+        "head_commit": "69f0d4ddd20746eaba7d119e933e09a6c46e0e8f",
+        "job_id": 139857249707,
+        "outcome": "SUCCESS_PASS_12_OF_12_LOCK_REPLAYS",
+        "bundle_sha256": "02fd9ff8b17f2eaa57d1b29dcec45a09f789d810b8a6aba7bf068666ebc7d17a",
+        "artifact_id": 15108698201,
+        "artifact_digest": "2b643635898b631f4bb4f4e686298acfd1edc37265fdff4378ebf2ff28fd1288",
+        "disposition": "UNPLANNED_DUPLICATE_TRIGGER_FROM_PR_WORKFLOW_PATH_FILTER; RETAIN AS ADDITIONAL EVIDENCE; NO FURTHER IDENTICAL REPLAY",
+        "artifact_size_bytes": 1036,
+        "retention_expires_at": "2027-02-24T10:49:12Z"
+      },
+      "accepted_requirements_blob_sha": "9a3f037574e7bfbc380e9a5101328dfb01c4b3fc"
+    },
+    {
+      "problem_id": "R3-API-AUDIT-300-20261126-RUN3",
+      "scope": "R3官方API 300期來源對帳",
+      "status": "PASS_RETAINED_NO_RERUN",
+      "evidence_pointer": "https://github.com/686wntod-dev/539/actions/runs/45777143838",
+      "artifact_digest": "c9e5ae29be92ce6e668a87621cc401fce7e1ed1c3a4d8f7108f78e595e2b4142",
+      "result": "300 accounted; 299 exact matches; 1 previously closed accepted snapshot exception; 0 unresolved",
+      "allowed_next_action": "引用Run #3；不得重開既有10/23已關閉例外",
+      "prohibited": [
+        "重跑相同300期對帳",
+        "重開已關閉10/23例外"
+      ],
+      "accepted_execution_refs": [
+        "c15044cb175372fe01427cb5d2a5ef3e36c8a481"
+      ],
+      "accepted_run_id": 45777143838,
+      "accepted_scope": {
+        "start_date": "2025-12-04",
+        "end_date": "2026-11-14",
+        "rows": 300,
+        "bundle_sha256": "02fd9ff8b17f2eaa57d1b29dcec45a09f789d810b8a6aba7bf068666ebc7d17a",
+        "result": "300 accounted; 299 exact; 1 closed accepted snapshot exception; 0 unresolved"
+      }
+    },
+    {
+      "problem_id": "RUN10-906-8-DIFFERENCES",
+      "scope": "Run10 906筆候選資料的8筆差異與官方歷史頁原始證據",
+      "status": "NEW_EVIDENCE_REQUIRED",
+      "evidence_pointer": "Issue #3 and comment 7189344225",
+      "allowed_next_action": "只接收新的官方歷史頁原始證據並append-only記錄",
+      "prohibited": [
+        "重做相同次級來源查核",
+        "覆寫候選檔或主檔",
+        "將次級來源當成官方原始證據"
+      ],
+      "note": "10/23 Run10 DUP002與R3 300期已關閉例外屬不同驗收範圍，不得混用。",
+      "evidence_history": [
+        {
+          "captured_at": "2026-11-26T10:44:20Z",
+          "workflow_run_id": 45804078358,
+          "workflow_url": "https://github.com/686wntod-dev/539/actions/runs/45804078358",
+          "artifact_id": 15108832201,
+          "artifact_sha256": "c08464cc53e13793b6039b012cce945dc1af25f41885f47cd881e798e4838d90",
+          "capture_scope": "2026-11 only (probe)",
+          "source_classification": "Taiwan Lottery website-internal API; not a published/stable API contract",
+          "results": {
+            "captured_months": 1,
+            "api_rows": 21,
+            "candidate_rows": 906,
+            "exact_date_and_five_number_matches": 12,
+            "api_only_new_dates": 9,
+            "same_date_number_conflicts": 0,
+            "candidate_reconciliation_status": "REVIEW_REQUIRED_DIFFERENCES"
+          },
+          "disposition": "APPEND_ONLY_CANDIDATE_EVIDENCE; NOT_OFFICIAL_HISTORICAL_PAGE_PROOF; DO_NOT_PROMOTE_OR_OVERWRITE_MASTER"
+        }
+      ]
+    },
+    {
+      "problem_id": "SOURCE-CANONICAL-REGISTRY-V3",
+      "scope": "Canonical Registry v3 Active原始來源／簽章",
+      "status": "NEW_EVIDENCE_REQUIRED",
+      "evidence_pointer": "Issue #3; comment 7189419068",
+      "allowed_next_action": "Use GPT Library/Stage/lock/manifests as AI_GENERATED_ARTIFACT evidence; build and validate new versioned Cleanroom replacements where needed. Do not search for presumed external original files or ask the user for backups. Never relabel a rebuild as historical Production.",
+      "prohibited": [
+        "重查目前repo相同三個分支",
+        "以GPT_REBUILT_REGISTRY_V1冒充Canonical Registry v3"
+      ],
+      "gpt_artifact_note": "GPT 已建立 GPT_REBUILT_REGISTRY_V1 及多份 Registry/Stage 證據；本輪新增 recovery inventory。Canonical Registry v3 Active 的原始身分仍需獨立證明。",
+      "legacy_status_disposition": "RETIRED_BY_STAGE206_NOT_AN_EXTERNAL_ORIGINAL_DELIVERY_BLOCKER",
+      "historical_identity": "NOT_ESTABLISHED",
+      "note": " Stage206 (2026-11-24) supersedes the assumption that these ChatGPT-created artifacts must be recovered from an external historical Production system."
+    },
+    {
+      "problem_id": "SOURCE-HISTORICAL-PRODUCTION-FORMAL7",
+      "scope": "歷史Production Formal7原始程式、訓練來源及lineage",
+      "status": "NEW_EVIDENCE_REQUIRED",
+      "evidence_pointer": "Issue #3; comment 7189419068",
+      "allowed_next_action": "Use GPT Library/Stage/lock/manifests as AI_GENERATED_ARTIFACT evidence; build and validate new versioned Cleanroom replacements where needed. Do not search for presumed external original files or ask the user for backups. Never relabel a rebuild as historical Production.",
+      "prohibited": [
+        "重查目前repo相同三個分支",
+        "以Cleanroom replacement lineage冒充歷史Production"
+      ],
+      "gpt_artifact_note": "本輪已從 GPT Library 重新取得並重算 Runtime v2、trainer、master_4042、Formal7 lock 等精確 SHA；清單見 recovery/gpt_generated_artifact_inventory_20261126.md。",
+      "legacy_status_disposition": "RETIRED_BY_STAGE206_NOT_AN_EXTERNAL_ORIGINAL_DELIVERY_BLOCKER",
+      "historical_identity": "NOT_ESTABLISHED",
+      "note": " Stage206 (2026-11-24) supersedes the assumption that these ChatGPT-created artifacts must be recovered from an external historical Production system."
+    },
+    {
+      "problem_id": "SOURCE-R3-AB-20261117",
+      "scope": "R3 2026-11-17 A-line trainer exact bytes、B-line backtest/program/lock",
+      "status": "NEW_EVIDENCE_REQUIRED",
+      "evidence_pointer": "Issue #3; comment 7189419068",
+      "allowed_next_action": "Use GPT Library/Stage/lock/manifests as AI_GENERATED_ARTIFACT evidence; build and validate new versioned Cleanroom replacements where needed. Do not search for presumed external original files or ask the user for backups. Never relabel a rebuild as historical Production.",
+      "prohibited": [
+        "重跑R3-HGB-NoPP-Shadow replay以代替缺失原件",
+        "將Shadow challenger稱為原始Production R3"
+      ],
+      "gpt_artifact_note": "R3-HGB-NoPP 2026-11-16 Shadow challenger 的 script/schema/lock 已在本輪重算 SHA；serialized model SHA 仍有既有 manifest 記錄，詳見 recovery inventory。",
+      "legacy_status_disposition": "RETIRED_BY_STAGE206_NOT_AN_EXTERNAL_ORIGINAL_DELIVERY_BLOCKER",
+      "historical_identity": "NOT_ESTABLISHED",
+      "note": " Stage206 (2026-11-24) supersedes the assumption that these ChatGPT-created artifacts must be recovered from an external historical Production system."
+    },
+    {
+      "problem_id": "SOURCE-TSA-WORM-DEPLOYMENT",
+      "scope": "外部TSA/WORM不可竄改時間戳及scheduler/worker/service部署收據",
+      "status": "NEW_EVIDENCE_REQUIRED",
+      "evidence_pointer": "Issue #3",
+      "allowed_next_action": "Only if external Production is explicitly pursued: create a new deployment and collect actual platform release/change, loaded runtime, scheduler/worker/service and fallback evidence. Do not seek presumed past receipts or treat GitHub artifact retention as WORM/TSA.",
+      "prohibited": [
+        "將GitHub Artifact保存期限視為WORM/TSA證據"
+      ],
+      "gpt_artifact_note": "本輪確認多份 GPT 建立的時間戳、鎖檔、Manifest、Runtime QA；這些可以沿用，但本身不是外部不可竄改時間戳或部署收據。",
+      "legacy_status_disposition": "NO_PAST_DEPLOYMENT_PRESUMED",
+      "note": " Stage206 confirms no prior external Production deployment is presumed."
+    },
+    {
+      "problem_id": "R3-FIXED10-FORWARD-BLINDTEST",
+      "scope": "R3固定10號排除池前向盲測",
+      "status": "NEW_EVIDENCE_REQUIRED",
+      "evidence_pointer": "Issue #3; comment 7189425822",
+      "allowed_next_action": "先滿足模型來源、逐期預測鎖、官方開獎封存及外部時間戳等啟動條件",
+      "prohibited": [
+        "宣稱已啟動盲測",
+        "宣稱達90%",
+        "用歷史回測或replay替代前向盲測"
+      ]
+    },
+    {
+      "problem_id": "GOV-DUP-20261126-001",
+      "scope": "歷史驗收索引與執行前防重複控制",
+      "status": "NEW_EVIDENCE_REQUIRED",
+      "evidence_pointer": "Issue #3; comment 7189643292",
+      "allowed_next_action": "沿用本problem_id；取得獨立PR review並合併後，於未來合法的新Replay驗證Actions append/push；不得為測試而重跑已接受Run #19/#20",
+      "prohibited": [
+        "宣稱防重複已部署，除非CI及Review證據齊備"
+      ],
+      "evidence_history": [
+        {
+          "captured_at": "2026-11-26T11:00:09Z",
+          "workflow_run_id": 45806503421,
+          "workflow_url": "https://github.com/686wntod-dev/539/actions/runs/45806503421",
+          "head_sha": "0c5c3e303c306253119e22c62dc05bff75c60856",
+          "job_id": 139863077578,
+          "result": "SUCCESS",
+          "checks": [
+            "10 unique problem IDs",
+            "duplicate rerun guard",
+            "validator+requirements+bundle replay fingerprint guard",
+            "default preflight production_authorized=false",
+            "Run10 incremental-only authorization"
+          ],
+          "disposition": "ACCEPTED_GOVERNANCE_PREFLIGHT_EVIDENCE; DOES_NOT_AUTHORIZE_PRODUCTION"
+        },
+        {
+          "captured_at": "2026-11-26T11:20:00Z",
+          "workflow_run_id": 45809562107,
+          "workflow_url": "https://github.com/686wntod-dev/539/actions/runs/45809562107",
+          "head_sha": "80cdb9a7a92a4246388d50c026cc5234abb8f4f7",
+          "result": "SUCCESS",
+          "checks": [
+            "least-privilege replay job contents:read",
+            "separate append job contents:write after replay success only",
+            "manual workflow_dispatch restricted to replay-ci-v1",
+            "bounded official capture guard",
+            "unique acceptance and duplicate replay guards"
+          ],
+          "disposition": "CI_VALIDATED; PR_REVIEW_AND_MERGE_PENDING; REAL_ACTIONS_APPEND_PUSH_NOT_YET_EXERCISED"
+        }
+      ],
+      "note": "機器可讀索引、fail-closed preflight、append-only replay fingerprint ledger及工作流程最小權限隔離已建立；最新push/PR治理CI通過。尚未取得獨立review、PR未合併，真正的成功後Actions append/push尚未在合法新Replay中驗證，因此不得標記完成或宣稱已部署。"
+    },
+    {
+      "problem_id": "DATA-4034-OFFICIAL-2014-2023",
+      "scope": "2014–2023 annual ZIP source-byte provenance re-attestation for the already completed 3,130-row crosscheck",
+      "status": "NEW_EVIDENCE_REQUIRED",
+      "evidence_pointer": "https://data.gov.tw/dataset/72921",
+      "allowed_next_action": "Preserve and cite the existing 3130-row zero-difference crosscheck. Only pursue raw ZIP bytes if an authorized GPT Library raw-byte path or a newly accessible official source is found; recompute SHA256 and link the hashes to the existing comparison records. Do not rerun row comparisons, do not ask the user for backups, and do not mark source provenance as officially verified until raw bytes/source identity are evidenced.",
+      "prohibited": [
+        "Re-run 3130-row date/period/number comparison",
+        "Reset existing 3130-row crosscheck to unverified",
+        "Ask user to provide external backup files",
+        "Claim current raw-byte SHA re-attestation when materialization is denied",
+        "Overwrite historical master"
+      ],
+      "source_leads": [
+        {
+          "url": "https://data.gov.tw/dataset/72921",
+          "classification": "TREASURY_ADMINISTRATION_PRIMARY_DATASET_CATALOG",
+          "status": "confirmed"
+        },
+        {
+          "url": "https://www.nta.gov.tw/opendata/公益彩券開獎號碼及各獎項彩金相關資料.csv",
+          "classification": "OFFICIAL_CSV_RESOURCE_LINK_REPORTED_BY_DATASET_MIRROR",
+          "status": "not_retrieved_in_this_run"
+        },
+        {
+          "url": "https://www.taiwanlottery.com/lotto/history/result_download/",
+          "classification": "TAIWAN_LOTTERY_OFFICIAL_ANNUAL_DOWNLOAD_INDEX",
+          "status": "page_confirmed"
+        }
+      ],
+      "note": "Correction to prior turn: 3,130 rows are NOT awaiting comparison. GPT Library already contains a 10-year crosscheck record with zero date/period/number-set differences and ten ZIP hashes. The annual ZIP objects are visible in the Library listing, but files/materialize explicitly denied raw-byte access for these objects. Therefore only source-byte re-attestation remains open; the completed row-level result must be retained.",
+      "existing_result": {
+        "status": "PASS_RETAINED_NO_RERUN",
+        "years": 10,
+        "rows": 3130,
+        "date_matches": 3130,
+        "zip_only": 0,
+        "master_only": 0,
+        "issue_id_diffs": 0,
+        "number_set_diffs": 0,
+        "prior_annual_zip_sha256_recorded": true,
+        "evidence_files": [
+          "539_2014-2023年度ZIP逐期交叉核對.csv",
+          "539_2014-2023_年度ZIP來源盤點與原始位元組驗收狀態_v1.csv"
+        ],
+        "note": "The row-level comparison is already completed and retained. This scope is only for raw-byte re-attestation/source provenance; it is not a request to rerun or recompare 3130 rows."
+      }
+    }
+  ],
+  "execution_contract": {
+    "before_any_task": [
+      "讀取本索引與治理Issue最新追加紀錄",
+      "將請求映射至既有problem_id；若同一根因或證據目標已存在，沿用原ID",
+      "若status為PASS_CLOSED或PASS_RETAINED_NO_RERUN，拒絕重跑並引用既有證據",
+      "若status為OPEN_SOURCE_NOT_RECOVERED，只允許搜尋未曾查過的新來源位置或新線索",
+      "若status為NOT_ACCESSIBLE_IN_THIS_RUN，沿用先前證據，不得改列未驗證",
+      "只有有新證據支持時，才可在原problem_id下標記REGRESSION_CONFIRMED"
+    ],
+    "before_reporting": [
+      "列出本輪實際新增證據及更新的problem_id",
+      "列出本輪明確未重做的項目",
+      "未實際部署的控制不得宣稱完成",
+      "Production授權需獨立關卡，不由本索引推定"
+    ]
+  },
+  "production_authorized": false,
+  "gpt_generated_artifact_recovery": {
+    "inventory_path": "recovery/gpt_generated_artifact_inventory_20261126.md",
+    "inventory_commit": "fe830fcad7ca6cc2b8c1891e50c44a9f9a95c7d7",
+    "inventory_date": "2026-11-26",
+    "policy": "GPT Library project artifacts are valid internal recovery sources. Do not ask the user for external backups as the default action. Reuse and hash-check existing GPT-created files; preserve the distinction between Cleanroom/Shadow replacements and historical Production originals.",
+    "verified_this_run": [
+      "master_4042.csv: 4042 rows, 2014-01-01 through 2026-11-21, SHA256 d04617018e5c2b97cd76822e7e61576420d6720a9a66e6d2064cd25c1c9d34f6",
+      "Formal7 Cleanroom Runtime v2 SHA256 fe0d2a5daf11e1be08fec302dff5715bb514fc97cc447ea00ff42840d51ce387; compile PASS",
+      "V1/V2/R3 CR1 trainer SHA256 9c802d713270599bf839dbf82ad0eb31d5bbf9417049087fe48c9589f34e469c; compile PASS",
+      "R3-HGB-NoPP 2026-11-16 prelock script SHA256 47a0749463d91b66b975cd00ac4301b4eabdf4b2e8e8fcd5b736d2504c816e12; compile PASS",
+      "Formal7 2026-11-17 seven-model lock JSON SHA256 37c3be7272548bf41772910d828ed593ec49c8c9037f70d4bfa6e283b1107ca1",
+      "R3-HGB-NoPP 2026-11-16 schema SHA256 4231655ed8d98465fec7310ed8f951889eb58b7fef1faa4f383e1f731cb3109a and lock SHA256 fbb7bd88b496367313424e4081370d9afa35e6db2196996572766ee65f79c234",
+      "Tracker v2 SHA256 118702e4d3a7baab939effaf17206185b1b28f16e6f8f8222dcdca73835dc41a; 1200 slots, 100 draw indices, 12 models, only 24 populated Pool10/lock ID rows",
+      "Stage116 seven-model Shadow prelock and Stage171 challenger manifest/status exact bytes rehashed"
+    ],
+    "data_version_guard": [
+      "4037-row Formal7 lock master SHA 6c18084eab2966e4afc37e45fa916ad4a77414f07733a2947e321851c56e1628 is not interchangeable with the 4042-row Shadow master SHA d04617018e5c2b97cd76822e7e61576420d6720a9a66e6d2064cd25c1c9d34f6",
+      "4043-row append-only candidate remains a separate version; do not promote or overwrite canonical data based on row count alone"
+    ],
+    "second_pass": {
+      "inventory_commit": "b7a58800bcc897048cbcc55800e65b09d7b41a2f",
+      "verified_at": "2026-11-26",
+      "exact_bytes_rehashed": [
+        "AI3_Legacy_Full4037_Rebuilt_v2.csv: 4037 rows; SHA256 6c18084eab2966e4afc37e45fa916ad4a77414f07733a2947e321851c56e1628",
+        "539_Stage169_master_4043_2026-11-23_append_only_candidate.csv: 4043 rows; SHA256 778214d7906c45d8dfd886eb5a52653868c6a4d874cdfb474d8aeb8199df0ce3",
+        "master_4043_2026-11-23_official_evidence_appended.csv: 4043 rows; SHA256 24abd0b9388b48bb0ce07e395673feadefa39491a0682b2fb2adb532ac0499c3"
+      ],
+      "stage179_records_recovered": [
+        "Stage179 report, predictions/metadata JSON, model summary, 312-row all-model rankings, SHA256 manifest",
+        "Stage182 corrected per-model method metadata",
+        "Stage181 final audit JSON and Stage173 result-sync manifest"
+      ],
+      "key_boundaries": [
+        "4037, 4042 and 4043 are distinct immutable data versions; 4043 candidates remain append-only and do not replace canonical 4042",
+        "Stage173 official result crosscheck is separate evidence; source trust and period ID in base 4043 row remain user-confirmed/inferred, not raw Taiwan Lottery evidence",
+        "Stage175 and Stage179 model artifact hashes/bytes differ; do not substitute or combine generations",
+        "Stage179 raw serialized model bytes and executed training source not recovered in this pass; Stage181 AUD-01 remains an existing finding",
+        "Stage179 model metadata must distinguish supervised 39,000-row classifiers from AI-1 deterministic frequency and AI-3 transition-count models"
+      ],
+      "execution_scope": "Recovery/lineage reconciliation only; no retraining, replay, prediction, scoring, lock mutation, or accepted-scope rerun.",
+      "parent_child_reconciliation": "Verified all 34 parent columns are value-identical between 4043 append-only candidate and evidence-enriched child; child adds exactly six official/secondary evidence columns. No parent values were overwritten."
+    },
+    "stage206_authoritative_reclassification": {
+      "source_document": "539_Stage206_專案來源身分重整與阻塞根因修正_2026-11-24.md",
+      "controlling_rule": "ChatGPT-created project artifacts are AI_GENERATED_ARTIFACT unless specific external provenance is independently evidenced; do not presume an external historical Production original existed.",
+      "legacy_src_01_to_05": "RETIRED_AS_EXTERNAL_ORIGINAL_RETRIEVAL_PREREQUISITE; historical identity NOT_ESTABLISHED; proceed with GPT-created evidence and versioned Cleanroom replacements.",
+      "src_06": "FUTURE_DEPLOYMENT_TASK_ONLY_IF_EXTERNAL_PRODUCTION_IS_DESIRED; no past deployment presumed.",
+      "stage206_baseline": {
+        "rows": 4034,
+        "from": "2014-01-01",
+        "to": "2026-11-12",
+        "master_sha256": "74ad955b47cfb04c6c8f3a3955ddbf6a50cb5a922c10d33ab5bf94fc8f5af9b7",
+        "registry_status": "CLEANROOM_ONLY_NOT_CANONICAL",
+        "production_authorized": false
+      },
+      "stage207_data_boundary": {
+        "structural_checks": "PASS",
+        "api_period_matches": "904/904",
+        "api_number_matches": "903/904",
+        "known_exception": "existing DUP-002",
+        "unverified_official_draws": "3130 rows (2014–2023)",
+        "instruction": "Do not rerun structural QA or completed 904-row reconciliation; future evidence must be append-only incremental."
+      },
+      "no_repeat_actions": [
+        "Do not ask user for external backup/old machine files as default",
+        "Do not rerun completed 4034 QA, 4042/4043 replays, Stage183 scorer tests, or Stage185 gate tests",
+        "Do not backdate Production identity, locks, or deployment receipts"
+      ],
+      "next_substantive_validation": [
+        "Cleanroom R3 full walk-forward vs random baseline with confidence intervals",
+        "Program-level leakage and cutoff review",
+        "Positive pool vs random baseline",
+        "Immutable forward lock and official result score accumulation"
+      ],
+      "inventory_commit": "66014074c73711466d10ebca6394690478ad3469"
+    },
+    "stage207_official_source_lead": {
+      "problem_id": "DATA-4034-OFFICIAL-2014-2023",
+      "existing_crosscheck": {
+        "rows": 3130,
+        "years": 10,
+        "date_matches": 3130,
+        "period_diffs": 0,
+        "number_set_diffs": 0,
+        "zip_only": 0,
+        "master_only": 0,
+        "prior_sha256_recorded": true
+      },
+      "raw_byte_status": "LIBRARY_OBJECTS_FOUND_BUT_RAW_BYTE_MATERIALIZATION_DENIED",
+      "unresolved": "Only raw-byte SHA re-attestation/source provenance; no row comparison rerun required.",
+      "official_catalog": "https://data.gov.tw/dataset/72921",
+      "next_step": "Find a new authorized raw-byte path or retrieve the official CSV source, then append evidence; do not ask user for files."
+    }
+  }
+}
