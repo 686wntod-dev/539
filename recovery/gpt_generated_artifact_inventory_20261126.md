@@ -107,3 +107,6 @@ The manifests and model output metadata are recovered, but the Stage179 serializ
 ### No execution scope repeated
 
 This pass did not retrain models, replay Stage179/181, regenerate predictions, score any draw, change historical locks, rerun the Cleanroom Run #19 or R3 300-row audit, or promote any candidate to canonical/Production. It is a recovery and lineage reconciliation only.
+
+
+Additional byte-content reconciliation: the 4,043-row parent candidate and its 4,043-row evidence-enriched child have identical values in all 34 parent columns; the child adds exactly six evidence columns (`official_evidence_status`, `official_evidence_source`, `official_evidence_url`, `official_evidence_checked_at`, `secondary_crosscheck_source`, `secondary_crosscheck_url`). This confirms the Stage173 evidence enrichment is append-only at the column level and did not rewrite any parent master values.
