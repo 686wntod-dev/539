@@ -70,7 +70,8 @@
         "disposition": "UNPLANNED_DUPLICATE_TRIGGER_FROM_PR_WORKFLOW_PATH_FILTER; RETAIN AS ADDITIONAL EVIDENCE; NO FURTHER IDENTICAL REPLAY",
         "artifact_size_bytes": 1036,
         "retention_expires_at": "2027-02-24T10:49:12Z"
-      }
+      },
+      "accepted_requirements_blob_sha": "9a3f037574e7bfbc380e9a5101328dfb01c4b3fc"
     },
     {
       "problem_id": "R3-API-AUDIT-300-20261126-RUN3",
