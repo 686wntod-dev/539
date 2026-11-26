@@ -6,7 +6,6 @@ on:
     paths:
       - "gpt_rebuild/replay_bundle.zip"
       - "gpt_rebuild/replay/audit_official_sources.py"
-      - ".github/workflows/539-r3-official-source-audit.yml"
 permissions:
   contents: read
   actions: read
