@@ -136,43 +136,47 @@
       "scope": "Canonical Registry v3 Active原始來源／簽章",
       "status": "OPEN_SOURCE_NOT_RECOVERED",
       "evidence_pointer": "Issue #3; comment 7189419068",
-      "allowed_next_action": "只查找尚未查過的新位置，例如舊repo、使用者備份或部署備份",
+      "allowed_next_action": "沿用 GPT Library 與 repo 內既有 GPT_REBUILT_REGISTRY_V1、Stage/manifest 做內部版本化重建與差異對照；不可再把要求使用者提供外部備份當預設下一步，也不可將重建版冒稱 Canonical Registry v3 Active。",
       "prohibited": [
         "重查目前repo相同三個分支",
         "以GPT_REBUILT_REGISTRY_V1冒充Canonical Registry v3"
-      ]
+      ],
+      "gpt_artifact_note": "GPT 已建立 GPT_REBUILT_REGISTRY_V1 及多份 Registry/Stage 證據；本輪新增 recovery inventory。Canonical Registry v3 Active 的原始身分仍需獨立證明。"
     },
     {
       "problem_id": "SOURCE-HISTORICAL-PRODUCTION-FORMAL7",
       "scope": "歷史Production Formal7原始程式、訓練來源及lineage",
       "status": "OPEN_SOURCE_NOT_RECOVERED",
       "evidence_pointer": "Issue #3; comment 7189419068",
-      "allowed_next_action": "只查找尚未查過的新位置",
+      "allowed_next_action": "沿用 GPT Library 已恢復的 Cleanroom Runtime v1/v2、CR1 trainer、4037/4042 master、7-model locks 與 manifests 做內部可重現性工作；不得要求使用者重新提供已存在檔案，不得冒稱歷史 Production。",
       "prohibited": [
         "重查目前repo相同三個分支",
         "以Cleanroom replacement lineage冒充歷史Production"
-      ]
+      ],
+      "gpt_artifact_note": "本輪已從 GPT Library 重新取得並重算 Runtime v2、trainer、master_4042、Formal7 lock 等精確 SHA；清單見 recovery/gpt_generated_artifact_inventory_20261126.md。"
     },
     {
       "problem_id": "SOURCE-R3-AB-20261117",
       "scope": "R3 2026-11-17 A-line trainer exact bytes、B-line backtest/program/lock",
       "status": "OPEN_SOURCE_NOT_RECOVERED",
       "evidence_pointer": "Issue #3; comment 7189419068",
-      "allowed_next_action": "只查找尚未查過的新位置",
+      "allowed_next_action": "沿用 GPT Library 已有的 R3-HGB-NoPP 32F Shadow script/schema/lock/manifest 與既有 Stage 做內部差異分析；不得要求使用者重新提供已存在的 Shadow 工件，也不得將其冒充 2026-11-17 A/B 原始 Production 工件。",
       "prohibited": [
         "重跑R3-HGB-NoPP-Shadow replay以代替缺失原件",
         "將Shadow challenger稱為原始Production R3"
-      ]
+      ],
+      "gpt_artifact_note": "R3-HGB-NoPP 2026-11-16 Shadow challenger 的 script/schema/lock 已在本輪重算 SHA；serialized model SHA 仍有既有 manifest 記錄，詳見 recovery inventory。"
     },
     {
       "problem_id": "SOURCE-TSA-WORM-DEPLOYMENT",
       "scope": "外部TSA/WORM不可竄改時間戳及scheduler/worker/service部署收據",
       "status": "OPEN_SOURCE_NOT_RECOVERED",
       "evidence_pointer": "Issue #3",
-      "allowed_next_action": "只接受新外部服務收據或新部署證據",
+      "allowed_next_action": "先整理 GPT 建立的 lock、Stage、manifest、CI 與執行紀錄；僅將其標記為應用層/CI 證據，不將其誤稱外部 TSA/WORM 或實際 Production deployment。",
       "prohibited": [
         "將GitHub Artifact保存期限視為WORM/TSA證據"
-      ]
+      ],
+      "gpt_artifact_note": "本輪確認多份 GPT 建立的時間戳、鎖檔、Manifest、Runtime QA；這些可以沿用，但本身不是外部不可竄改時間戳或部署收據。"
     },
     {
       "problem_id": "R3-FIXED10-FORWARD-BLINDTEST",
@@ -247,5 +251,25 @@
       "Production授權需獨立關卡，不由本索引推定"
     ]
   },
-  "production_authorized": false
+  "production_authorized": false,
+  "gpt_generated_artifact_recovery": {
+    "inventory_path": "recovery/gpt_generated_artifact_inventory_20261126.md",
+    "inventory_commit": "eafb505ffb3ee4a7f0982c40c4ed0ad4add8911b",
+    "inventory_date": "2026-11-26",
+    "policy": "GPT Library project artifacts are valid internal recovery sources. Do not ask the user for external backups as the default action. Reuse and hash-check existing GPT-created files; preserve the distinction between Cleanroom/Shadow replacements and historical Production originals.",
+    "verified_this_run": [
+      "master_4042.csv: 4042 rows, 2014-01-01 through 2026-11-21, SHA256 d04617018e5c2b97cd76822e7e61576420d6720a9a66e6d2064cd25c1c9d34f6",
+      "Formal7 Cleanroom Runtime v2 SHA256 fe0d2a5daf11e1be08fec302dff5715bb514fc97cc447ea00ff42840d51ce387; compile PASS",
+      "V1/V2/R3 CR1 trainer SHA256 9c802d713270599bf839dbf82ad0eb31d5bbf9417049087fe48c9589f34e469c; compile PASS",
+      "R3-HGB-NoPP 2026-11-16 prelock script SHA256 47a0749463d91b66b975cd00ac4301b4eabdf4b2e8e8fcd5b736d2504c816e12; compile PASS",
+      "Formal7 2026-11-17 seven-model lock JSON SHA256 37c3be7272548bf41772910d828ed593ec49c8c9037f70d4bfa6e283b1107ca1",
+      "R3-HGB-NoPP 2026-11-16 schema SHA256 4231655ed8d98465fec7310ed8f951889eb58b7fef1faa4f383e1f731cb3109a and lock SHA256 fbb7bd88b496367313424e4081370d9afa35e6db2196996572766ee65f79c234",
+      "Tracker v2 SHA256 118702e4d3a7baab939effaf17206185b1b28f16e6f8f8222dcdca73835dc41a; 1200 slots, 100 draw indices, 12 models, only 24 populated Pool10/lock ID rows",
+      "Stage116 seven-model Shadow prelock and Stage171 challenger manifest/status exact bytes rehashed"
+    ],
+    "data_version_guard": [
+      "4037-row Formal7 lock master SHA 6c18084eab2966e4afc37e45fa916ad4a77414f07733a2947e321851c56e1628 is not interchangeable with the 4042-row Shadow master SHA d04617018e5c2b97cd76822e7e61576420d6720a9a66e6d2064cd25c1c9d34f6",
+      "4043-row append-only candidate remains a separate version; do not promote or overwrite canonical data based on row count alone"
+    ]
+  }
 }
