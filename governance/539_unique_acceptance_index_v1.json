@@ -51,11 +51,24 @@
         "為了重新確認而重跑同一commit的Run #19"
       ],
       "accepted_execution_refs": [
-        "5cfd2ce9cb1867be55458aee32336bc0257ce26a"
+        "5cfd2ce9cb1867be55458aee32336bc0257ce26a",
+        "eea9114d6c2f4d5f6e3e8e5b3a2f2f9a6f4a8d6c"
       ],
       "accepted_run_id": 45777147538,
       "accepted_code_blob_sha": "eb7ee81ab8f065f15585bf5c6a0fa6d57f0b25a3",
-      "accepted_bundle_blob_sha": "a3b55848501d9674c622ab99e0225a711c99385a"
+      "accepted_bundle_blob_sha": "a3b55848501d9674c622ab99e0225a711c99385a",
+      "duplicate_trigger_incident": {
+        "run_id": 45804846897,
+        "workflow_run_url": "https://github.com/686wntod-dev/539/actions/runs/45804846897",
+        "merge_commit": "eea9114 (full SHA confirmed in workflow checkout log)",
+        "head_commit": "69f0d4ddd20746eaba7d119e933e09a6c46e0e8f",
+        "job_id": 139857249707,
+        "outcome": "SUCCESS_PASS_12_OF_12_LOCK_REPLAYS",
+        "bundle_sha256": "02fd9ff8b17f2eaa57d1b29dcec45a09f789d810b8a6aba7bf068666ebc7d17a",
+        "artifact_id": 15108698201,
+        "artifact_digest": "2b643635898b631f4bb4f4e686298acfd1edc37265fdff4378ebf2ff28fd1288",
+        "disposition": "UNPLANNED_DUPLICATE_TRIGGER_FROM_PR_WORKFLOW_PATH_FILTER; RETAIN AS ADDITIONAL EVIDENCE; NO FURTHER IDENTICAL REPLAY"
+      }
     },
     {
       "problem_id": "R3-API-AUDIT-300-20261126-RUN3",
