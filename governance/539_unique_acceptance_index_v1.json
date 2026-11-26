@@ -247,34 +247,51 @@
     },
     {
       "problem_id": "DATA-4034-OFFICIAL-2014-2023",
-      "scope": "Stage207 4,034-row master: official per-draw source cross-check for 2014–2023 (3,130 rows only)",
+      "scope": "2014–2023 annual ZIP source-byte provenance re-attestation for the already completed 3,130-row crosscheck",
       "status": "NEW_EVIDENCE_REQUIRED",
       "evidence_pointer": "https://data.gov.tw/dataset/72921",
-      "allowed_next_action": "Retrieve the Treasury Administration CSV resource from the newly discovered official dataset source, preserve raw bytes and SHA256, map by date/issue ID/five numbers, then append an evidence-only overlay. Do not ask the user for backups and do not rerun Stage207 structural QA or the accepted 904-row API reconciliation.",
+      "allowed_next_action": "Preserve and cite the existing 3130-row zero-difference crosscheck. Only pursue raw ZIP bytes if an authorized GPT Library raw-byte path or a newly accessible official source is found; recompute SHA256 and link the hashes to the existing comparison records. Do not rerun row comparisons, do not ask the user for backups, and do not mark source provenance as officially verified until raw bytes/source identity are evidenced.",
       "prohibited": [
-        "Overwrite 4034-row master",
-        "Re-run closed structural QA or 904-row reconciliation",
-        "Mark rows verified before raw source bytes and row-level comparison are complete",
-        "Treat a timed-out download link as retrieved evidence"
+        "Re-run 3130-row date/period/number comparison",
+        "Reset existing 3130-row crosscheck to unverified",
+        "Ask user to provide external backup files",
+        "Claim current raw-byte SHA re-attestation when materialization is denied",
+        "Overwrite historical master"
       ],
       "source_leads": [
         {
           "url": "https://data.gov.tw/dataset/72921",
-          "classification": "GOVERNMENT_OPEN_DATASET_ORIGINAL_SOURCE_CATALOG",
-          "retrieved": "page metadata only"
+          "classification": "TREASURY_ADMINISTRATION_PRIMARY_DATASET_CATALOG",
+          "status": "confirmed"
         },
         {
-          "url": "https://gaze.nta.gov.tw/dntmb/OpenData/csvDw?ntaCode=D423F",
-          "classification": "CSV_RESOURCE_LINKED_FROM_GOVERNMENT_DATASET",
-          "retrieval_status": "TIMEOUT_NOT_DOWNLOADED"
+          "url": "https://www.nta.gov.tw/opendata/公益彩券開獎號碼及各獎項彩金相關資料.csv",
+          "classification": "OFFICIAL_CSV_RESOURCE_LINK_REPORTED_BY_DATASET_MIRROR",
+          "status": "not_retrieved_in_this_run"
         },
         {
           "url": "https://www.taiwanlottery.com/lotto/history/result_download/",
           "classification": "TAIWAN_LOTTERY_OFFICIAL_ANNUAL_DOWNLOAD_INDEX",
-          "retrieved": "annual-year listing 103–112 observed"
+          "status": "page_confirmed"
         }
       ],
-      "note": "This is a distinct unfinished row-level evidence scope from the already closed 904-row API reconciliation and Stage207 structural QA. No raw data or row verification was performed in this discovery step."
+      "note": "Correction to prior turn: 3,130 rows are NOT awaiting comparison. GPT Library already contains a 10-year crosscheck record with zero date/period/number-set differences and ten ZIP hashes. The annual ZIP objects are visible in the Library listing, but files/materialize explicitly denied raw-byte access for these objects. Therefore only source-byte re-attestation remains open; the completed row-level result must be retained.",
+      "existing_result": {
+        "status": "PASS_RETAINED_NO_RERUN",
+        "years": 10,
+        "rows": 3130,
+        "date_matches": 3130,
+        "zip_only": 0,
+        "master_only": 0,
+        "issue_id_diffs": 0,
+        "number_set_diffs": 0,
+        "prior_annual_zip_sha256_recorded": true,
+        "evidence_files": [
+          "539_2014-2023年度ZIP逐期交叉核對.csv",
+          "539_2014-2023_年度ZIP來源盤點與原始位元組驗收狀態_v1.csv"
+        ],
+        "note": "The row-level comparison is already completed and retained. This scope is only for raw-byte re-attestation/source provenance; it is not a request to rerun or recompare 3130 rows."
+      }
     }
   ],
   "execution_contract": {
@@ -372,10 +389,20 @@
     },
     "stage207_official_source_lead": {
       "problem_id": "DATA-4034-OFFICIAL-2014-2023",
-      "unverified_rows": 3130,
-      "source_discovery": "data.gov.tw dataset 72921; Taiwan Lottery official annual download index",
-      "download_status": "TIMEOUT_NOT_DOWNLOADED",
-      "next_step": "Obtain official CSV bytes, hash, map records and compare only the 3130 uncovered rows; append-only evidence overlay."
+      "existing_crosscheck": {
+        "rows": 3130,
+        "years": 10,
+        "date_matches": 3130,
+        "period_diffs": 0,
+        "number_set_diffs": 0,
+        "zip_only": 0,
+        "master_only": 0,
+        "prior_sha256_recorded": true
+      },
+      "raw_byte_status": "LIBRARY_OBJECTS_FOUND_BUT_RAW_BYTE_MATERIALIZATION_DENIED",
+      "unresolved": "Only raw-byte SHA re-attestation/source provenance; no row comparison rerun required.",
+      "official_catalog": "https://data.gov.tw/dataset/72921",
+      "next_step": "Find a new authorized raw-byte path or retrieve the official CSV source, then append evidence; do not ask user for files."
     }
   }
 }
