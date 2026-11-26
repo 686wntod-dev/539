@@ -56,3 +56,54 @@ The inventory records only artifacts actually found in the project Library and/o
 - Build a version-aware artifact map linking Stage, Library artifact, SHA256 manifest, model ID, lock ID, master version and permitted use.
 - Continue locating exact GPT Library bytes for the remaining manifest-referenced serialized model artifacts and formal master versions.
 - Use existing Cleanroom/Shadow assets for scoped analysis only; keep Formal7 Production and R3 90% target gated by their existing validation requirements.
+
+
+## Second recovery pass — exact master versions and Stage179/181 lineage (2026-11-26)
+
+### Exact master bytes recovered and rehashed
+
+| Artifact | Bytes | SHA-256 | Scope and status |
+|---|---:|---|---|
+| AI3_Legacy_Full4037_Rebuilt_v2.csv | 3,489,427 | 6c18084eab2966e4afc37e45fa916ad4a77414f07733a2947e321851c56e1628 | Exact 4,037-row master, 2014-01-01–2026-11-16; matches the master hash in the 2026-11-17 Formal7 lock. Recovered from GPT Library and rehashed this pass. |
+| 539_Stage169_master_4043_2026-11-23_append_only_candidate.csv | 3,494,965 | 778214d7906c45d8dfd886eb5a52653868c6a4d874cdfb474d8aeb8199df0ce3 | Exact 4,043-row append-only candidate, 2014-01-01–2026-11-23; matches Stage179/181 source hash. Not canonical master. |
+| master_4043_2026-11-23_official_evidence_appended.csv | 3,519,609 | 24abd0b9388b48bb0ce07e395673feadefa39491a0682b2fb2adb532ac0499c3 | Exact 4,043-row enriched candidate, 40 columns; append-only evidence overlay. Last row remains USER_CONFIRMED for base source/period ID, with a separate OFFICIAL_RESULT_CROSSCHECKED field using CTBC Bank and CNA cross-checks. Not a Taiwan Lottery raw response archive and not canonical. |
+
+Both 4,043-row files have unique dates and issue IDs. The last row is 2026-11-23 / 115000283 / 04 07 22 30 34. The enriched candidate does not overwrite its parent or change the base source trust grade.
+
+### Stage179 / Stage181 evidence recovered
+
+| Artifact | Bytes | SHA-256 |
+|---|---:|---|
+| Stage179_report.md | 3,203 | dbddc3f8aab0bf86a93862916b163e435437a202b4178b20aecffcd8f5d93a46 |
+| Stage179_predictions_and_metadata.json | 19,918 | 5ffe840ab488323dd7bffb274b78b5af92804a19a3cefd63fa7b1ad83af302c7 |
+| Stage179_model_summary.csv | 1,566 | 06d0132d54d22c625c413872f18c8c74b444798feb7c29d83bb3ef2802fe6399 |
+| Stage179_all_model_rankings.csv | 32,923 | b0c67d61ee3d53e8c0a258ded97521229a1d1096639327bb250fd7601cc1f780 |
+| Stage179_SHA256_manifest.csv | 1,117 | bc13035165e8d33ef6de3df90e9e73d4c1928b6c1b83597048d43ffb8ed21041 |
+| Stage182_corrected_per_model_metadata.csv | 1,800 | 0d02fa78b3915f00cf641c1973697c1931571033b46deaf0bc061c712eee96b9 |
+| Stage181_final_audit.json | 13,473 | c1992cfc5603d21a6605aa77dd50c437498b7a6a46761de1ebd85e61f487ae5 |
+| Stage173_2026-11-24_official_result_sync_manifest.json | 1,749 | 42c5c74562e9c04bf33fa21662388dce07dcdc92fc8cf1e12cb15c982413ff97 |
+
+Stage179 recorded eight Shadow model outputs and 312 rankings (8 × 39), with 4,043-row input SHA matching the recovered append-only candidate. Stage182 corrected the method metadata: V1/V2/R3 and AI2 proxies are supervised classifiers; AI-1 Legacy/TieSeed are 20-draw deterministic frequency rankers with zero supervised fit rows; AI-3 is a full-history K=2000 transition-count model with 4,042 adjacent transitions, not a 39,000-row supervised fit. AI2 17F remains a challenger, not proven superior to 19F.
+
+Stage181 reports structural checks PASS for all eight Stage180 model outputs, but keeps the entire release SHADOW_ONLY. It records the Stage179 training-source packaging gap (AUD-01), method metadata correction (AUD-02), V2 tie-at-cutoff (AUD-03), overlap-order normalization (AUD-04), AI2 proxy limitations (AUD-05), R3 90% not proven (AUD-06), no strict paired historical comparison (AUD-07), and the 2026-11-23 source evidence qualification (AUD-08). These are existing audit findings, not newly invented defects; do not open duplicate problem IDs.
+
+### Distinct model artifact generations — do not merge
+
+Stage175 and Stage179 manifests describe different artifact snapshots:
+- Stage175 ET/HGB/LOGIT: 676,009 / 42,208 / 1,905 bytes, hashes 0dc76123... / e2b56311... / 01b72acf...
+- Stage179 ET/HGB/LOGIT: 685,945 / 31,312 / 1,905 bytes, hashes d1678a76... / 21070b18... / 428fe622...
+- Stage175 AI2 19F: 239,529 bytes, SHA 4f9fefa0...
+- Stage179 AI2 19F: 228,809 bytes, SHA 38f382ab...
+
+The manifests and model output metadata are recovered, but the Stage179 serialized joblib raw bytes and the exact Stage179 trainer/source package were not materialized in this pass. Stage181 AUD-01 explicitly records that the Stage179 bundle omitted the executed training script and complete arguments. Therefore Stage179 predictions/rankings are recoverable as GPT-created historical records, while exact trainer-to-model reproducibility is not established. Do not substitute Stage175 artifacts for Stage179 artifacts or vice versa.
+
+### Version-aware recovery classification
+
+- **A — exact bytes + matching SHA recovered:** 4037 master; 4042 Shadow master; 4043 append-only candidate; 4043 evidence-enriched candidate; Cleanroom Runtime v2; CR1 trainer; R3-HGB-NoPP 2026-11-16 script/schema/lock; 2026-11-17 Formal7 lock; Stage116 Shadow lock and listed report/tracker artifacts.
+- **B — GPT historical records/manifests recovered, serialized raw bytes or execution source incomplete:** Stage179 model artifacts and training source; Stage175/179 artifact generation linkage; Stage179 run package.
+- **C — reproducible Cleanroom/Shadow replacement from retained code/config/data, new identity only:** CR1 replacement runtime/trainer and the explicitly identified successor/proxy challengers. This does not restore historical Production identity.
+- **D — not established from current GPT Library evidence:** Canonical Registry v3 Active original; historical Production runtime/trainer originals; exact 2026-11-17 R3 A/B original trainer/backtest/lock bytes; external TSA/WORM and actual Production deployment receipts.
+
+### No execution scope repeated
+
+This pass did not retrain models, replay Stage179/181, regenerate predictions, score any draw, change historical locks, rerun the Cleanroom Run #19 or R3 300-row audit, or promote any candidate to canonical/Production. It is a recovery and lineage reconciliation only.
