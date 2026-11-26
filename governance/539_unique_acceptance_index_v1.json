@@ -1,0 +1,183 @@
+{
+  "schema_version": "1.0.0",
+  "project": "Taiwan Daily 539",
+  "index_id": "539-UNIQUE-ACCEPTANCE-INDEX-V1",
+  "governance_issue": "https://github.com/686wntod-dev/539/issues/3",
+  "governance_defect_id": "GOV-DUP-20261126-001",
+  "created_from_commit": "249bb245e248d8456a119abdb261ebcf5afe7c27",
+  "policy": {
+    "execution_preflight_required": true,
+    "append_only": true,
+    "closed_items_rerun": false,
+    "inaccessible_is_not_unverified": true,
+    "missing_original_source_is_not_permission_to_revalidate_completed_data": true,
+    "new_evidence_required_to_reopen": true,
+    "same_root_cause_same_problem_id": true,
+    "no_production_authorization_by_this_index": true
+  },
+  "statuses": [
+    "PASS_CLOSED",
+    "PASS_RETAINED_NO_RERUN",
+    "OPEN_SOURCE_NOT_RECOVERED",
+    "NOT_ACCESSIBLE_IN_THIS_RUN",
+    "NEW_EVIDENCE_REQUIRED",
+    "REGRESSION_CONFIRMED"
+  ],
+  "locked_items": [
+    {
+      "problem_id": "DATA-4042-RESTORE-REPLAY",
+      "scope": "既有4042期主檔恢復及7/7模型獨立重播（Stage121歷史驗收）",
+      "status": "PASS_RETAINED_NO_RERUN",
+      "evidence_pointer": "Project historical record: Stage121 acceptance; details retained in prior project conversation",
+      "sha256": null,
+      "allowed_next_action": "只引用既有驗收；若有新資料只做增量",
+      "prohibited": [
+        "重做4042期恢復",
+        "重跑相同7/7模型獨立重播",
+        "因本輪工作區不可讀而改列未驗證"
+      ],
+      "note": "此專案摘要未提供Stage121原始SHA，故不臆造；後續若能讀取原報告，只追加其真實SHA。"
+    },
+    {
+      "problem_id": "CI-CLEANROOM-REPLAY-20261126-RUN19",
+      "scope": "Cleanroom Replay CI Run #19",
+      "status": "PASS_RETAINED_NO_RERUN",
+      "evidence_pointer": "https://github.com/686wntod-dev/539/actions/runs/45777147538",
+      "artifact_sha256": "02fd9ff8b17f2eaa57d1b29dcec45a09f789d810b8a6aba7bf068666ebc7d17a",
+      "artifact_digest": "fe5481a146210f9f5e9a32623be3d33d9dcbb76041ccecb5f9ac3de2a99ce54c",
+      "allowed_next_action": "引用既有12/12 replay結果；僅新程式變更時執行新的CI run",
+      "prohibited": [
+        "為了重新確認而重跑同一commit的Run #19"
+      ]
+    },
+    {
+      "problem_id": "R3-API-AUDIT-300-20261126-RUN3",
+      "scope": "R3官方API 300期來源對帳",
+      "status": "PASS_RETAINED_NO_RERUN",
+      "evidence_pointer": "https://github.com/686wntod-dev/539/actions/runs/45777143838",
+      "artifact_digest": "c9e5ae29be92ce6e668a87621cc401fce7e1ed1c3a4d8f7108f78e595e2b4142",
+      "result": "300 accounted; 299 exact matches; 1 previously closed accepted snapshot exception; 0 unresolved",
+      "allowed_next_action": "引用Run #3；不得重開既有10/23已關閉例外",
+      "prohibited": [
+        "重跑相同300期對帳",
+        "重開已關閉10/23例外"
+      ]
+    },
+    {
+      "problem_id": "RUN10-906-8-DIFFERENCES",
+      "scope": "Run10 906筆候選資料的8筆差異與官方歷史頁原始證據",
+      "status": "NEW_EVIDENCE_REQUIRED",
+      "evidence_pointer": "Issue #3 and comment 7189344225",
+      "allowed_next_action": "只接收新的官方歷史頁原始證據並append-only記錄",
+      "prohibited": [
+        "重做相同次級來源查核",
+        "覆寫候選檔或主檔",
+        "將次級來源當成官方原始證據"
+      ],
+      "note": "10/23 Run10 DUP002與R3 300期已關閉例外屬不同驗收範圍，不得混用。",
+      "evidence_history": [
+        {
+          "captured_at": "2026-11-26T10:44:20Z",
+          "workflow_run_id": 45804078358,
+          "workflow_url": "https://github.com/686wntod-dev/539/actions/runs/45804078358",
+          "artifact_id": 15108832201,
+          "artifact_sha256": "c08464cc53e13793b6039b012cce945dc1af25f41885f47cd881e798e4838d90",
+          "capture_scope": "2026-11 only (probe)",
+          "source_classification": "Taiwan Lottery website-internal API; not a published/stable API contract",
+          "results": {
+            "captured_months": 1,
+            "api_rows": 21,
+            "candidate_rows": 906,
+            "exact_date_and_five_number_matches": 12,
+            "api_only_new_dates": 9,
+            "same_date_number_conflicts": 0,
+            "candidate_reconciliation_status": "REVIEW_REQUIRED_DIFFERENCES"
+          },
+          "disposition": "APPEND_ONLY_CANDIDATE_EVIDENCE; NOT_OFFICIAL_HISTORICAL_PAGE_PROOF; DO_NOT_PROMOTE_OR_OVERWRITE_MASTER"
+        }
+      ]
+    },
+    {
+      "problem_id": "SOURCE-CANONICAL-REGISTRY-V3",
+      "scope": "Canonical Registry v3 Active原始來源／簽章",
+      "status": "OPEN_SOURCE_NOT_RECOVERED",
+      "evidence_pointer": "Issue #3; comment 7189419068",
+      "allowed_next_action": "只查找尚未查過的新位置，例如舊repo、使用者備份或部署備份",
+      "prohibited": [
+        "重查目前repo相同三個分支",
+        "以GPT_REBUILT_REGISTRY_V1冒充Canonical Registry v3"
+      ]
+    },
+    {
+      "problem_id": "SOURCE-HISTORICAL-PRODUCTION-FORMAL7",
+      "scope": "歷史Production Formal7原始程式、訓練來源及lineage",
+      "status": "OPEN_SOURCE_NOT_RECOVERED",
+      "evidence_pointer": "Issue #3; comment 7189419068",
+      "allowed_next_action": "只查找尚未查過的新位置",
+      "prohibited": [
+        "重查目前repo相同三個分支",
+        "以Cleanroom replacement lineage冒充歷史Production"
+      ]
+    },
+    {
+      "problem_id": "SOURCE-R3-AB-20261117",
+      "scope": "R3 2026-11-17 A-line trainer exact bytes、B-line backtest/program/lock",
+      "status": "OPEN_SOURCE_NOT_RECOVERED",
+      "evidence_pointer": "Issue #3; comment 7189419068",
+      "allowed_next_action": "只查找尚未查過的新位置",
+      "prohibited": [
+        "重跑R3-HGB-NoPP-Shadow replay以代替缺失原件",
+        "將Shadow challenger稱為原始Production R3"
+      ]
+    },
+    {
+      "problem_id": "SOURCE-TSA-WORM-DEPLOYMENT",
+      "scope": "外部TSA/WORM不可竄改時間戳及scheduler/worker/service部署收據",
+      "status": "OPEN_SOURCE_NOT_RECOVERED",
+      "evidence_pointer": "Issue #3",
+      "allowed_next_action": "只接受新外部服務收據或新部署證據",
+      "prohibited": [
+        "將GitHub Artifact保存期限視為WORM/TSA證據"
+      ]
+    },
+    {
+      "problem_id": "R3-FIXED10-FORWARD-BLINDTEST",
+      "scope": "R3固定10號排除池前向盲測",
+      "status": "NEW_EVIDENCE_REQUIRED",
+      "evidence_pointer": "Issue #3; comment 7189425822",
+      "allowed_next_action": "先滿足模型來源、逐期預測鎖、官方開獎封存及外部時間戳等啟動條件",
+      "prohibited": [
+        "宣稱已啟動盲測",
+        "宣稱達90%",
+        "用歷史回測或replay替代前向盲測"
+      ]
+    },
+    {
+      "problem_id": "GOV-DUP-20261126-001",
+      "scope": "歷史驗收索引與執行前防重複控制",
+      "status": "OPEN_SOURCE_NOT_RECOVERED",
+      "evidence_pointer": "Issue #3; comment 7189643292",
+      "allowed_next_action": "建立機器可讀索引、preflight與fail-closed CI",
+      "prohibited": [
+        "宣稱防重複已部署，除非CI及Review證據齊備"
+      ]
+    }
+  ],
+  "execution_contract": {
+    "before_any_task": [
+      "讀取本索引與治理Issue最新追加紀錄",
+      "將請求映射至既有problem_id；若同一根因或證據目標已存在，沿用原ID",
+      "若status為PASS_CLOSED或PASS_RETAINED_NO_RERUN，拒絕重跑並引用既有證據",
+      "若status為OPEN_SOURCE_NOT_RECOVERED，只允許搜尋未曾查過的新來源位置或新線索",
+      "若status為NOT_ACCESSIBLE_IN_THIS_RUN，沿用先前證據，不得改列未驗證",
+      "只有有新證據支持時，才可在原problem_id下標記REGRESSION_CONFIRMED"
+    ],
+    "before_reporting": [
+      "列出本輪實際新增證據及更新的problem_id",
+      "列出本輪明確未重做的項目",
+      "未實際部署的控制不得宣稱完成",
+      "Production授權需獨立關卡，不由本索引推定"
+    ]
+  },
+  "production_authorized": false
+}
