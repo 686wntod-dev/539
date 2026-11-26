@@ -18,17 +18,21 @@ concurrency:
   group: 539-cleanroom-replay-${{ github.ref }}
   cancel-in-progress: false
 
-permissions:
-  contents: write
-
 jobs:
   cleanroom-replay:
     runs-on: ubuntu-latest
     timeout-minutes: 30
+    permissions:
+      contents: read
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Restrict manual replay to the canonical replay branch
+        if: github.event_name == 'workflow_dispatch' && github.ref != 'refs/heads/replay-ci-v1'
+        run: |
+          echo "::error::Manual Cleanroom replay is only permitted from replay-ci-v1."
+          exit 1
       - name: Governance preflight — block duplicate accepted replay execution
         run: >-
           python governance/preflight.py
@@ -70,8 +74,20 @@ jobs:
           path: gpt_rebuild/replay_bundle_contents/validation_output/validation_result.json
           if-no-files-found: warn
           retention-days: 90
-      - name: Append successful replay fingerprint to ledger
-        if: success() && github.event_name != 'pull_request'
+
+  append-replay-ledger:
+    needs: cleanroom-replay
+    if: ${{ needs.cleanroom-replay.result == 'success' && github.event_name != 'pull_request' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - name: Append successful replay fingerprint
         env:
           RUN_ID: ${{ github.run_id }}
           RUN_ATTEMPT: ${{ github.run_attempt }}
