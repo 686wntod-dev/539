@@ -8,8 +8,8 @@ from datetime import datetime
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-BUNDLE = ROOT / "replay_bundle.zip"
-OUT = ROOT / "official_source_audit"
+BUNDLE = ROOT / "gpt_rebuild" / "replay_bundle.zip"
+OUT = ROOT / "gpt_rebuild" / "replay" / "official_source_audit"
 OUT.mkdir(parents=True, exist_ok=True)
 EXPECTED_BUNDLE_SHA = "02fd9ff8b17f2eaa57d1b29dcec45a09f789d810b8a6aba7bf068666ebc7d17a"
 START_DATE, END_DATE = "2025-12-04", "2026-11-14"
