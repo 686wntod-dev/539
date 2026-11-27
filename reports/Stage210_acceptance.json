@@ -1,0 +1,43 @@
+{
+  "stage": "Stage210",
+  "lock_id": "539-STAGE210-20261127-3038b695396084e5",
+  "created_at": "2026-11-27T08:01:31+08:00",
+  "target_date": "2026-11-27",
+  "target_period": "115000287_INFERRED_FROM_SEQUENCE_NOT_OFFICIAL_CAPTURE",
+  "master_rows": 4046,
+  "master_sha256": "3038b695396084e52f14f3ced9ea8e0b2e34204034499d41b2322db01a468bbe",
+  "lock_sha256": "b54de397958158433f1d4651f1266e76dd1bef9b49eace76a9671017d2eea06b",
+  "predictions_sha256": "78cc8d65c0babf8285075d9657671a0eec695c5499f2000e2e0c11d870a845f5",
+  "training_samples": 39000,
+  "runtime_sha256": "fe0d2a5daf11e1be08fec302dff5715bb514fc97cc447ea00ff42840d51ce387",
+  "r3_A5": [
+    "32",
+    "14",
+    "34",
+    "16",
+    "28"
+  ],
+  "r3_B5": [
+    "30",
+    "25",
+    "07",
+    "29",
+    "33"
+  ],
+  "r3_positive_overlap": [
+    "07",
+    "16",
+    "29",
+    "30",
+    "32",
+    "33",
+    "34"
+  ],
+  "production_authorized": false,
+  "caveats": [
+    "11/26 result user-provided; official raw bytes not archived.",
+    "Target period inferred from sequence.",
+    "Cleanroom successor, not recovered Production source.",
+    "No R3 90% claim."
+  ]
+}
