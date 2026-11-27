@@ -1,0 +1,95 @@
+{
+  "schema": "539_r3_ab_zero_draw_ledger_v1",
+  "status": "APPEND_ONLY_SHADOW_EVALUATION",
+  "rule": "A5/B5 groups are scored separately. Success means all five pre-locked exclusions are absent from the draw. Keep all draw records; never alter predictions retrospectively.",
+  "records": [
+    {
+      "stage": "Stage209",
+      "draw_date": "2026-11-26",
+      "lock_id": "539-STAGE209-20261126-e2a48c0261120749",
+      "result_source": "user_provided",
+      "winning_numbers": [
+        "12",
+        "13",
+        "14",
+        "21",
+        "36"
+      ],
+      "A5": [
+        "14",
+        "28",
+        "25",
+        "13",
+        "19"
+      ],
+      "B5": [
+        "15",
+        "16",
+        "24",
+        "01",
+        "23"
+      ],
+      "A5_drawn": [
+        "13",
+        "14"
+      ],
+      "B5_drawn": [],
+      "A5_not_drawn": 3,
+      "B5_not_drawn": 5,
+      "A5_all_five_not_drawn": false,
+      "B5_all_five_not_drawn": true,
+      "period": "115000286_INFERRED_FROM_SEQUENCE_NOT_OFFICIAL_CAPTURE"
+    },
+    {
+      "stage": "Stage210",
+      "draw_date": "2026-11-27",
+      "lock_id": "539-STAGE210-20261127-3038b695396084e5",
+      "result_source": "user_provided",
+      "winning_numbers": [
+        "08",
+        "21",
+        "28",
+        "35",
+        "39"
+      ],
+      "A5": [
+        "32",
+        "14",
+        "34",
+        "16",
+        "28"
+      ],
+      "B5": [
+        "30",
+        "25",
+        "07",
+        "29",
+        "33"
+      ],
+      "A5_drawn": [
+        "28"
+      ],
+      "B5_drawn": [],
+      "A5_not_drawn": 4,
+      "B5_not_drawn": 5,
+      "A5_all_five_not_drawn": false,
+      "B5_all_five_not_drawn": true,
+      "period": "115000287_INFERRED_FROM_SEQUENCE_NOT_OFFICIAL_CAPTURE"
+    }
+  ],
+  "cumulative": {
+    "verified_draws": 2,
+    "A5_all_five_not_drawn_successes": 0,
+    "B5_all_five_not_drawn_successes": 2,
+    "A5_success_rate": 0,
+    "B5_success_rate": 1,
+    "consecutive_A5_successes": 0,
+    "consecutive_B5_successes": 2
+  },
+  "production_authorized": false,
+  "caveats": [
+    "Both results are user-provided; official raw response bytes are not archived.",
+    "Both period numbers are inferred from sequence.",
+    "Two draws are insufficient to establish long-run A/B superiority or 90% exclusion performance."
+  ]
+}
