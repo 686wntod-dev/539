@@ -1,0 +1,215 @@
+{
+  "stage": "Stage211",
+  "lock_id": "539-STAGE211-20261128-12a80d7c14a9fe77",
+  "created_at": "2026-11-28T00:33:23+08:00",
+  "target_draw_date": "2026-11-28",
+  "target_period": "115000288_INFERRED_FROM_SEQUENCE_NOT_OFFICIAL_CAPTURE",
+  "status": "SHADOW_ONLY_LOCKED_FORMAL_PRODUCTION_HOLD",
+  "production_authorized": false,
+  "parent_stage": "Stage210",
+  "parent_rows": 4046,
+  "parent_master_sha256": "3038b695396084e52f14f3ced9ea8e0b2e34204034499d41b2322db01a468bbe",
+  "master_file": "master_4047_append_only_candidate.csv",
+  "master_rows": 4047,
+  "master_sha256": "ab5b1de1fd0e62de264a5e11b03adbe7b679047573c9196788c46f122ed8ceda",
+  "new_result_2026_11_27": {
+    "numbers": [
+      "08",
+      "21",
+      "28",
+      "35",
+      "39"
+    ],
+    "source": "USER_PROVIDED",
+    "raw_official_bytes_archived": false,
+    "period": "115000287_INFERRED_FROM_SEQUENCE_NOT_OFFICIAL_CAPTURE"
+  },
+  "runtime_source": "539_Formal7_Cleanroom_Runtime_4037_v2.py",
+  "runtime_source_sha256": "fe0d2a5daf11e1be08fec302dff5715bb514fc97cc447ea00ff42840d51ce387",
+  "training": {
+    "window_draws": 1000,
+    "binary_samples": 39000,
+    "features18": 18,
+    "features19": 19
+  },
+  "models": {
+    "V1-Rebuild-1-CR1": {
+      "direction": "positive",
+      "A": [
+        "32",
+        "36",
+        "31",
+        "22",
+        "20"
+      ],
+      "B": [
+        "26",
+        "33",
+        "21",
+        "06",
+        "30"
+      ]
+    },
+    "V2-New-1-CR1": {
+      "direction": "positive",
+      "A": [
+        "26",
+        "01",
+        "32",
+        "31",
+        "16"
+      ],
+      "B": [
+        "37",
+        "36",
+        "06",
+        "02",
+        "20"
+      ]
+    },
+    "R3-New-1-CR1": {
+      "direction": "reverse",
+      "A": [
+        "14",
+        "16",
+        "15",
+        "25",
+        "02"
+      ],
+      "B": [
+        "17",
+        "28",
+        "24",
+        "01",
+        "11"
+      ]
+    },
+    "AI-1-Legacy-CR1": {
+      "direction": "positive",
+      "A": [
+        "32",
+        "20",
+        "21",
+        "30",
+        "07"
+      ],
+      "B": [
+        "24",
+        "28",
+        "29",
+        "34",
+        "37"
+      ]
+    },
+    "AI-1-TieSeed-CR1": {
+      "direction": "positive",
+      "A": [
+        "32",
+        "20",
+        "21",
+        "30",
+        "29"
+      ],
+      "B": [
+        "28",
+        "07",
+        "24",
+        "39",
+        "34"
+      ]
+    },
+    "AI-2-19F-CR1": {
+      "direction": "positive",
+      "A": [
+        "32",
+        "31",
+        "36",
+        "20",
+        "22"
+      ],
+      "B": [
+        "30",
+        "28",
+        "26",
+        "04",
+        "16"
+      ]
+    },
+    "AI-3-Full4036-CR1": {
+      "direction": "positive",
+      "A": [
+        "27",
+        "25",
+        "34",
+        "17",
+        "07"
+      ],
+      "B": [
+        "06",
+        "05",
+        "10",
+        "13",
+        "38"
+      ]
+    }
+  },
+  "positive_pool10_vote_counts": {
+    "10": 1,
+    "13": 1,
+    "16": 2,
+    "17": 1,
+    "20": 5,
+    "21": 3,
+    "22": 2,
+    "24": 2,
+    "25": 1,
+    "26": 3,
+    "27": 1,
+    "28": 3,
+    "29": 2,
+    "30": 4,
+    "31": 3,
+    "32": 5,
+    "33": 1,
+    "34": 3,
+    "36": 3,
+    "37": 2,
+    "38": 1,
+    "39": 1,
+    "06": 3,
+    "07": 3,
+    "01": 1,
+    "02": 1,
+    "04": 1,
+    "05": 1
+  },
+  "r3_A5": [
+    "14",
+    "16",
+    "15",
+    "25",
+    "02"
+  ],
+  "r3_B5": [
+    "17",
+    "28",
+    "24",
+    "01",
+    "11"
+  ],
+  "r3_positive_pool_overlap": [
+    "01",
+    "02",
+    "16",
+    "17",
+    "24",
+    "25",
+    "28"
+  ],
+  "limitations": [
+    "11/27 result user-provided; official raw bytes not archived.",
+    "Target period inferred from sequence.",
+    "Cleanroom successor, not historical Production recovery.",
+    "No R3 90% exclusion or predictive superiority claim."
+  ]
+}
